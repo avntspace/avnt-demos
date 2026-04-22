@@ -231,7 +231,7 @@ const stories = [
     mainKey: "whiteMules",
     defaultSize: "8",
     fitTitle: "Build the light fit.",
-    fitCopy: "Pair the white mules with the washed blue denim set and the brown cow print belt without leaving the PDP.",
+    fitCopy: "White mules with washed blue denim and the brown cow print belt.",
     companions: [
       { key: "washedJacket", recommendedSize: "M" },
       { key: "washedPants", recommendedSize: "32" },
@@ -244,7 +244,7 @@ const stories = [
     mainKey: "blackMules",
     defaultSize: "8",
     fitTitle: "Build the dark fit.",
-    fitCopy: "Stack the black mules with the black denim jacket, black work pants, and black eyeball belt in one pass.",
+    fitCopy: "Black mules with black denim and the black eyeball belt.",
     companions: [
       { key: "blackJacket", recommendedSize: "M" },
       { key: "blackPants", recommendedSize: "30" },
