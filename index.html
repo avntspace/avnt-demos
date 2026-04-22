@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AVNT Demos</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #080808;
+        color: #f5f5f5;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      main {
+        width: min(960px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 72px 0 96px;
+      }
+
+      h1 {
+        margin: 0 0 14px;
+        font-size: 42px;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      p {
+        margin: 0;
+        max-width: 640px;
+        color: #bdbdbd;
+        line-height: 1.6;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        margin-top: 38px;
+      }
+
+      .card {
+        padding: 22px;
+        border: 1px solid #262626;
+        background: #101010;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .card span {
+        display: block;
+      }
+
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #8c8c8c;
+      }
+
+      .title {
+        margin-top: 10px;
+        font-size: 24px;
+      }
+
+      .copy {
+        margin-top: 10px;
+        color: #b8b8b8;
+        line-height: 1.55;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>AVNT Demos</h1>
+      <p>
+        Centralized brand demos for bundle logic, cart urgency, and AOV optimization layered onto
+        each brand’s existing storefront design.
+      </p>
+
+      <div class="grid">
+        <a class="card" href="./trapstar/">
+          <span class="eyebrow">Brand Demo</span>
+          <span class="title">Trapstar</span>
+          <span class="copy">Bundle logic and cart urgency on top of Trapstar’s current PDP and cart language.</span>
+        </a>
+
+        <a class="card" href="./esenes/">
+          <span class="eyebrow">Brand Demo</span>
+          <span class="title">Esenes</span>
+          <span class="copy">Eyeball mule fit-building demo layered onto Esenes’ existing product detail layout.</span>
+        </a>
+      </div>
+    </main>
+  </body>
+</html>

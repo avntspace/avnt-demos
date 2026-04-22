@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trapstar Bundling Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260422e" />
+  </head>
+  <body>
+    <div class="announcement-bar">Free shipping over £160 within the UK</div>
+
+    <header class="site-header">
+      <nav class="site-nav site-nav--left">
+        <a href="#">Hit a Lick Sale</a>
+        <a href="#">Drop</a>
+        <a href="#">Trispeed 3000</a>
+        <a href="#">Shop All</a>
+      </nav>
+
+      <div class="site-logo">
+        <img src="./trapstar-logo.avif" alt="Trapstar It's A Secret" />
+      </div>
+
+      <div class="site-nav site-nav--right">
+        <span>USD</span>
+        <span>⌕</span>
+        <span>◌</span>
+        <button type="button" class="bag-trigger" id="bag-trigger" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 8.5V7a5 5 0 0 1 10 0v1.5" />
+            <path d="M5.5 8.5h13l-1 11h-11z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="demo-toggle-shell">
+      <div class="demo-toggle-row">
+        <div class="demo-toggle-copy">
+          <span class="demo-pill">AVNT demo</span>
+          <span class="demo-toggle-label">Switch PDP story</span>
+        </div>
+        <div class="story-picker__controls" id="story-picker"></div>
+      </div>
+      <p class="demo-proof">
+        This setup typically increases AOV by 15-30% on brands at your level.
+      </p>
+    </div>
+
+    <main class="page-wrap">
+      <section class="product-page">
+        <div class="product-grid">
+          <div class="product-media">
+            <div class="product-media__hero" id="hero-viewport">
+              <div class="hero-track" id="hero-track"></div>
+            </div>
+            <div class="hero-dots" id="hero-dots"></div>
+            <div class="product-media__stack" id="thumbnail-row"></div>
+          </div>
+
+          <div class="product-info">
+            <div class="product-header">
+              <h1 id="product-title"></h1>
+              <p class="product-price" id="product-price"></p>
+            </div>
+
+            <div class="product-divider"></div>
+
+            <div class="size-area">
+              <label class="size-area__label">Size</label>
+              <div class="size-grid" id="main-size-grid"></div>
+            </div>
+
+            <div class="utility-buttons">
+              <button type="button" class="utility-button">What's my size?</button>
+              <button type="button" class="utility-button">Size Chart</button>
+            </div>
+
+            <button type="button" class="add-to-cart-button" id="add-main-to-bag">
+              <span class="add-to-cart-button__icon">⌂</span>
+              <span>Add to cart</span>
+            </button>
+
+            <section class="product-upgrade-strip">
+              <span>Free shipping over £160</span>
+              <span id="pdp-low-stock-copy"></span>
+            </section>
+
+            <section class="bundle-teaser" id="fit-teaser">
+              <p class="bundle-teaser__eyebrow">Complete the look</p>
+              <h2 id="fit-title"></h2>
+              <p class="bundle-teaser__copy" id="fit-copy"></p>
+              <button type="button" class="bundle-teaser__cta" id="scroll-fit">
+                Shop the full look
+              </button>
+              <div class="bundle-teaser__items" id="fit-teaser-items"></div>
+            </section>
+
+            <p class="product-description" id="product-description"></p>
+          </div>
+        </div>
+
+        <section class="complete-look" id="full-look">
+          <div class="complete-look__header">
+            <div>
+              <p class="complete-look__eyebrow">Complete the look</p>
+              <h2>Shop the full look.</h2>
+              <p class="complete-look__subcopy">Pick your size and add the rest.</p>
+            </div>
+          </div>
+          <div class="look-grid" id="look-grid"></div>
+        </section>
+      </section>
+    </main>
+
+    <div class="cart-drawer-overlay" id="cart-overlay"></div>
+    <aside class="cart-drawer" id="cart-drawer">
+      <div class="cart-drawer__header">
+        <div class="cart-drawer__title-row">
+          <h2>Cart</h2>
+          <span class="cart-count" id="cart-count">0</span>
+        </div>
+        <button type="button" class="cart-close" id="cart-close">×</button>
+      </div>
+
+      <section class="shipping-progress">
+        <div class="shipping-progress__copy">
+          <p id="shipping-status"></p>
+        </div>
+        <div class="shipping-progress__bar">
+          <span id="shipping-fill"></span>
+        </div>
+        <div class="shipping-progress__scale">
+          <span>£0</span>
+          <span>£160</span>
+        </div>
+      </section>
+
+      <section class="cart-alert">
+        <span class="cart-alert__icon">i</span>
+        <p>
+          <strong>Your items aren’t reserved.</strong> Check out quickly to make
+          sure you don’t miss out.
+        </p>
+      </section>
+
+      <section class="cart-hold" id="cart-hold" hidden>
+        <span class="cart-hold__label">Bag held for</span>
+        <span class="cart-hold__time" id="cart-hold-copy">05:00</span>
+      </section>
+
+      <section class="cart-body" id="cart-body"></section>
+
+      <footer class="cart-footer">
+        <div class="cart-footer__line cart-footer__line--muted">
+          <span>Discount</span>
+          <span>+</span>
+        </div>
+        <div class="cart-footer__line cart-footer__line--total">
+          <span>Estimated total</span>
+          <strong id="cart-total">£0.00</strong>
+        </div>
+        <p class="cart-footer__caption">Taxes and shipping calculated at checkout.</p>
+        <button type="button" class="checkout-button">Check out</button>
+        <p class="cart-footer__outcome" id="cart-outcome"></p>
+      </footer>
+    </aside>
+
+    <div class="floating-hold" id="floating-hold" hidden>
+      <span id="floating-hold-copy">You have 05:00 to checkout</span>
+    </div>
+
+    <div class="mobile-sticky-cart">
+      <button type="button" class="mobile-sticky-cart__button" id="add-main-to-bag-mobile">
+        <span class="add-to-cart-button__icon">⌂</span>
+        <span>Add to cart</span>
+      </button>
+    </div>
+
+    <script src="./app.js?v=20260422e"></script>
+  </body>
+</html>
