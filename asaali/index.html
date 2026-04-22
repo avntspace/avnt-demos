@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asaali Bundling Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260422a" />
+  </head>
+  <body>
+    <div class="demo-switcher" id="story-switcher"></div>
+
+    <header class="site-header">
+      <div class="site-header__mobile">
+        <button class="icon-button" type="button" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a class="site-logo" href="#">
+          <img src="./assets/asaali-logo.svg" alt="Asaali" />
+        </a>
+        <button class="icon-button icon-button--bag" type="button" id="bag-trigger-mobile" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7.5 8.25V7.25a4.5 4.5 0 0 1 9 0v1"></path>
+            <path d="M5.75 8.25h12.5l-1 11H6.75z"></path>
+          </svg>
+          <span id="bag-count-mobile">0</span>
+        </button>
+      </div>
+
+      <div class="site-header__desktop">
+        <nav class="desktop-nav desktop-nav--left">
+          <a href="#">Shop All</a>
+          <a href="#">New</a>
+          <a href="#">Tops</a>
+          <a href="#">Jackets</a>
+          <a href="#">Bottoms</a>
+        </nav>
+
+        <a class="site-logo" href="#">
+          <img src="./assets/asaali-logo.svg" alt="Asaali" />
+        </a>
+
+        <nav class="desktop-nav desktop-nav--right">
+          <a href="#">Sweatsuits</a>
+          <a href="#">Collabs</a>
+          <a href="#">Contact</a>
+          <button class="bag-link" type="button" id="bag-trigger" aria-label="Open cart">
+            <span>Bag</span>
+            <span id="bag-count">0</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="pdp-shell">
+        <div class="pdp-media">
+          <div class="pdp-gallery" id="gallery"></div>
+          <div class="pdp-thumbs" id="thumbs"></div>
+        </div>
+
+        <div class="pdp-info">
+          <div class="breadcrumbs">Home / Shop / <span id="breadcrumb-label"></span></div>
+          <h1 id="product-title"></h1>
+          <p class="product-price" id="product-price"></p>
+
+          <div class="option-group" id="color-group" hidden>
+            <div class="option-group__row">
+              <span class="option-label">Color:</span>
+              <span class="option-selected" id="selected-color-label"></span>
+            </div>
+            <div class="color-swatches" id="color-swatches"></div>
+          </div>
+
+          <div class="option-group">
+            <div class="option-group__row">
+              <span class="option-label">Size:</span>
+              <span class="option-selected" id="selected-size-label"></span>
+            </div>
+            <div class="size-grid" id="main-size-grid"></div>
+          </div>
+
+          <div class="availability-row">
+            <span>Availability: In stock</span>
+            <div class="quantity-stepper">
+              <button type="button" id="qty-minus" aria-label="Decrease quantity">−</button>
+              <span id="qty-value">1</span>
+              <button type="button" id="qty-plus" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+
+          <button class="add-to-cart-button" id="add-main-to-cart" type="button">Add to cart</button>
+
+          <ul class="detail-list" id="detail-list"></ul>
+
+          <section class="fit-section">
+            <h2>Add These To The Fit</h2>
+            <div class="fit-grid" id="fit-grid"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-drawer" id="cart-drawer" aria-hidden="true">
+      <div class="cart-drawer__header">
+        <h2>CART (<span id="cart-count-title">0</span>)</h2>
+        <button type="button" class="cart-close" id="cart-close" aria-label="Close cart">×</button>
+      </div>
+
+      <div class="cart-items" id="cart-items"></div>
+
+      <div class="cart-summary">
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <span id="subtotal-value">$0.00</span>
+        </div>
+      </div>
+
+      <button class="checkout-button" type="button">Checkout</button>
+      <button class="continue-link" type="button" id="continue-shopping">Continue shopping</button>
+    </aside>
+
+    <script src="./app.js?v=20260422a"></script>
+  </body>
+</html>
