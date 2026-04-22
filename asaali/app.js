@@ -1,4 +1,5 @@
 const SHIPPING_THRESHOLD = 30000;
+const CART_HOLD_MS = 5 * 60 * 1000;
 
 const products = {
   cannaAnorak: {
@@ -133,7 +134,8 @@ const state = {
   mainColor: null,
   quantity: 1,
   bundleSelections: {},
-  cart: []
+  cart: [],
+  holdExpiresAt: null
 };
 
 const storySwitcher = document.getElementById("story-switcher");
@@ -150,6 +152,7 @@ const selectedSizeLabel = document.getElementById("selected-size-label");
 const qtyValue = document.getElementById("qty-value");
 const detailList = document.getElementById("detail-list");
 const fitGrid = document.getElementById("fit-grid");
+const fitPreviewItems = document.getElementById("fit-preview-items");
 const cartOverlay = document.getElementById("cart-overlay");
 const cartDrawer = document.getElementById("cart-drawer");
 const cartItems = document.getElementById("cart-items");
@@ -161,6 +164,9 @@ const shippingStatus = document.getElementById("shipping-status");
 const shippingFill = document.getElementById("shipping-fill");
 const shippingThresholdLabel = document.getElementById("shipping-threshold-label");
 const cartOutcome = document.getElementById("cart-outcome");
+const cartHold = document.getElementById("cart-hold");
+const cartHoldCopy = document.getElementById("cart-hold-copy");
+let holdIntervalId = null;
 
 document.getElementById("qty-minus").addEventListener("click", () => {
   state.quantity = Math.max(1, state.quantity - 1);
@@ -212,6 +218,50 @@ function isLowStock(size) {
   return size && size.inventory > 0 && size.inventory <= 5;
 }
 
+function formatHoldTime(msRemaining) {
+  const totalSeconds = Math.max(0, Math.ceil(msRemaining / 1000));
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
+function updateHoldTimerUI() {
+  if (!state.holdExpiresAt || state.cart.length === 0) {
+    cartHold.hidden = true;
+    cartHoldCopy.textContent = "05:00";
+    return;
+  }
+
+  const msRemaining = state.holdExpiresAt - Date.now();
+  const formatted = msRemaining <= 0 ? "00:00" : formatHoldTime(msRemaining);
+  cartHold.hidden = false;
+  cartHoldCopy.textContent = formatted;
+}
+
+function clearHoldTimer() {
+  state.holdExpiresAt = null;
+  if (holdIntervalId) {
+    clearInterval(holdIntervalId);
+    holdIntervalId = null;
+  }
+  updateHoldTimerUI();
+}
+
+function startHoldTimer() {
+  if (state.holdExpiresAt) return;
+
+  state.holdExpiresAt = Date.now() + CART_HOLD_MS;
+  updateHoldTimerUI();
+
+  holdIntervalId = window.setInterval(() => {
+    updateHoldTimerUI();
+    if (state.holdExpiresAt && state.holdExpiresAt - Date.now() <= 0) {
+      clearInterval(holdIntervalId);
+      holdIntervalId = null;
+    }
+  }, 1000);
+}
+
 function renderStorySwitcher() {
   storySwitcher.innerHTML = stories
     .map(
@@ -233,6 +283,8 @@ function renderStorySwitcher() {
       state.mainSize = main.defaultSize;
       state.mainColor = main.defaultColor || null;
       state.quantity = 1;
+      state.cart = [];
+      clearHoldTimer();
       render();
     });
   });
@@ -323,6 +375,10 @@ function renderInfo() {
 function renderFitGrid() {
   const story = getCurrentStory();
 
+  fitPreviewItems.innerHTML = [getMainProduct().media[0], ...story.bundle.map((key) => products[key].media)]
+    .map((src, index) => `<div class="fit-preview__item"><img src="${src}" alt="Fit preview ${index + 1}" /></div>`)
+    .join("");
+
   fitGrid.innerHTML = story.bundle
     .map((key) => {
       const product = products[key];
@@ -369,6 +425,10 @@ function addToCart(entry) {
   const product = products[entry.key];
   const size = getProductSize(product, entry.size);
   if (!size || size.disabled) return;
+
+  if (state.cart.length === 0) {
+    startHoldTimer();
+  }
 
   const existing = state.cart.find(
     (item) => item.key === entry.key && item.size === entry.size && (item.color || "") === (entry.color || "")
@@ -417,6 +477,7 @@ function renderCart() {
   }
 
   if (!state.cart.length) {
+    clearHoldTimer();
     cartItems.innerHTML = `<p class="cart-item__meta">Your cart is empty.</p>`;
     return;
   }
@@ -467,6 +528,7 @@ function openCart() {
   cartDrawer.classList.add("is-open");
   cartOverlay.classList.add("is-open");
   cartDrawer.setAttribute("aria-hidden", "false");
+  updateHoldTimerUI();
 }
 
 function closeCart() {
@@ -481,6 +543,7 @@ function render() {
   renderInfo();
   renderFitGrid();
   renderCart();
+  updateHoldTimerUI();
 }
 
 window.addEventListener("resize", renderGallery);

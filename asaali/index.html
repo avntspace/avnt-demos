@@ -98,10 +98,23 @@
 
           <button class="add-to-cart-button" id="add-main-to-cart" type="button">Add to cart</button>
 
+          <section class="fit-preview">
+            <p class="fit-preview__eyebrow">Complete the fit</p>
+            <div class="fit-preview__row">
+              <div class="fit-preview__items" id="fit-preview-items"></div>
+              <div class="fit-preview__copy">
+                <strong>Built as a full set.</strong>
+                <span>Tap sizes below to add the matching pieces directly to the bag.</span>
+              </div>
+            </div>
+          </section>
+
           <ul class="detail-list" id="detail-list"></ul>
 
           <section class="fit-section">
+            <p class="fit-section__eyebrow">Complete the fit</p>
             <h2>Add These To The Fit</h2>
+            <p class="fit-section__copy">Tap a size to add directly to cart.</p>
             <div class="fit-grid" id="fit-grid"></div>
           </section>
         </div>
@@ -133,6 +146,11 @@
         <p>
           <strong>Your items aren’t reserved.</strong> Check out quickly to lock the fit in.
         </p>
+      </section>
+
+      <section class="cart-hold" id="cart-hold" hidden>
+        <span class="cart-hold__label">Bag held for</span>
+        <span class="cart-hold__time" id="cart-hold-copy">05:00</span>
       </section>
 
       <div class="cart-items" id="cart-items"></div>
