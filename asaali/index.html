@@ -115,6 +115,26 @@
         <button type="button" class="cart-close" id="cart-close" aria-label="Close cart">×</button>
       </div>
 
+      <section class="shipping-progress">
+        <div class="shipping-progress__copy">
+          <p id="shipping-status">Add an item to start building toward free shipping.</p>
+        </div>
+        <div class="shipping-progress__bar">
+          <span id="shipping-fill"></span>
+        </div>
+        <div class="shipping-progress__scale">
+          <span>$0</span>
+          <span id="shipping-threshold-label">$300</span>
+        </div>
+      </section>
+
+      <section class="cart-alert">
+        <span class="cart-alert__icon">i</span>
+        <p>
+          <strong>Your items aren’t reserved.</strong> Check out quickly to lock the fit in.
+        </p>
+      </section>
+
       <div class="cart-items" id="cart-items"></div>
 
       <div class="cart-summary">
@@ -122,6 +142,7 @@
           <span>Subtotal</span>
           <span id="subtotal-value">$0.00</span>
         </div>
+        <p class="cart-summary__caption" id="cart-outcome"></p>
       </div>
 
       <button class="checkout-button" type="button">Checkout</button>

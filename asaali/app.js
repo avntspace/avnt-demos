@@ -1,9 +1,19 @@
+const SHIPPING_THRESHOLD = 30000;
+
 const products = {
   cannaAnorak: {
     key: "cannaAnorak",
     title: "Cannacamo Anorak Jacket",
     price: 25000,
-    sizes: ["XS", "Small", "Medium", "Large", "XL", "2X", "3X"],
+    sizes: [
+      { label: "XS", inventory: 8 },
+      { label: "Small", inventory: 11 },
+      { label: "Medium", inventory: 14 },
+      { label: "Large", inventory: 6 },
+      { label: "XL", inventory: 4 },
+      { label: "2X", inventory: 0, disabled: true },
+      { label: "3X", inventory: 2 }
+    ],
     defaultSize: "Large",
     bullets: [
       "Cotton blend shell with all-over Canna Camo print",
@@ -12,43 +22,28 @@ const products = {
       "Designed to pair with the matching Cargo Tech Pants"
     ],
     media: [
-      {
-        kind: "crop",
-        src: "./assets/canna-pdp-desktop.png",
-        desktop: { size: "165%", position: "14% 17%" },
-        mobile: { size: "220%", position: "10% 17%" }
-      },
-      {
-        kind: "crop",
-        src: "./assets/canna-listing.png",
-        desktop: { size: "176%", position: "8% 14%" },
-        mobile: { size: "250%", position: "8% 13%" }
-      },
-      {
-        kind: "crop",
-        src: "./assets/canna-pdp-desktop.png",
-        desktop: { size: "182%", position: "11% 33%" },
-        mobile: { size: "238%", position: "11% 34%" }
-      },
-      {
-        kind: "crop",
-        src: "./assets/asaali-pdp-mobile.png",
-        desktop: { size: "135%", position: "49% 21%" },
-        mobile: { size: "165%", position: "49% 20%" }
-      }
+      "./assets/crops/canna-jacket.png",
+      "./assets/crops/canna-jacket.png",
+      "./assets/crops/canna-jacket.png",
+      "./assets/crops/canna-jacket.png"
     ]
   },
   cannaPants: {
     key: "cannaPants",
     title: "Cannacamo Cargo Tech Pants",
     price: 18000,
-    sizes: ["28", "30", "32", "34", "36", "38", "40", "42"],
+    sizes: [
+      { label: "28", inventory: 4 },
+      { label: "30", inventory: 5 },
+      { label: "32", inventory: 9 },
+      { label: "34", inventory: 7 },
+      { label: "36", inventory: 3 },
+      { label: "38", inventory: 2 },
+      { label: "40", inventory: 0, disabled: true },
+      { label: "42", inventory: 0, disabled: true }
+    ],
     defaultSize: "34",
-    media: {
-      src: "./assets/canna-listing.png",
-      desktop: { size: "182%", position: "49% 18%" },
-      mobile: { size: "230%", position: "49% 17%" }
-    }
+    media: "./assets/crops/canna-pants.png"
   },
   pantoneHoodie: {
     key: "pantoneHoodie",
@@ -56,7 +51,15 @@ const products = {
     price: 26000,
     colors: ["Blue", "Grey", "Pink"],
     defaultColor: "Grey",
-    sizes: ["XS", "Small", "Medium", "Large", "XL", "2X", "3X"],
+    sizes: [
+      { label: "XS", inventory: 6 },
+      { label: "Small", inventory: 11 },
+      { label: "Medium", inventory: 13 },
+      { label: "Large", inventory: 7 },
+      { label: "XL", inventory: 4 },
+      { label: "2X", inventory: 2 },
+      { label: "3X", inventory: 0, disabled: true }
+    ],
     defaultSize: "Large",
     bullets: [
       "True to size",
@@ -65,55 +68,44 @@ const products = {
       "Built to complete the matching Pantone fit"
     ],
     media: [
-      {
-        kind: "crop",
-        src: "./assets/pantone-pdp-desktop.png",
-        desktop: { size: "134%", position: "13% 16%" },
-        mobile: { size: "178%", position: "14% 16%" }
-      },
-      {
-        kind: "crop",
-        src: "./assets/pantone-pdp-desktop.png",
-        desktop: { size: "140%", position: "14% 36%" },
-        mobile: { size: "188%", position: "14% 37%" }
-      },
-      {
-        kind: "crop",
-        src: "./assets/pantone-listing.png",
-        desktop: { size: "170%", position: "63% 15%" },
-        mobile: { size: "225%", position: "63% 15%" }
-      },
-      {
-        kind: "crop",
-        src: "./assets/asaali-pdp-mobile.png",
-        desktop: { size: "138%", position: "49% 22%" },
-        mobile: { size: "170%", position: "49% 22%" }
-      }
+      "./assets/crops/pantone-hoodie.png",
+      "./assets/crops/pantone-hoodie.png",
+      "./assets/crops/pantone-hoodie.png",
+      "./assets/crops/pantone-hoodie.png"
     ]
   },
   pantoneSweats: {
     key: "pantoneSweats",
     title: "Pantone Cartel Sweatpants",
     price: 18000,
-    sizes: ["XS", "Small", "Medium", "Large", "XL", "2X", "3X"],
+    sizes: [
+      { label: "XS", inventory: 5 },
+      { label: "Small", inventory: 10 },
+      { label: "Medium", inventory: 12 },
+      { label: "Large", inventory: 8 },
+      { label: "XL", inventory: 3 },
+      { label: "2X", inventory: 1 },
+      { label: "3X", inventory: 0, disabled: true }
+    ],
     defaultSize: "Large",
-    media: {
-      src: "./assets/pantone-listing.png",
-      desktop: { size: "166%", position: "33.5% 14%" },
-      mobile: { size: "215%", position: "33.5% 14%" }
-    }
+    media: "./assets/crops/pantone-sweats.png"
   },
   deadhomiesTee: {
     key: "deadhomiesTee",
     title: "Deadhomie$ In Loving Memory Tee",
     price: 8000,
-    sizes: ["XS", "Small", "Medium", "Large", "XL", "2X", "3X", "4X"],
+    sizes: [
+      { label: "XS", inventory: 9 },
+      { label: "Small", inventory: 15 },
+      { label: "Medium", inventory: 18 },
+      { label: "Large", inventory: 10 },
+      { label: "XL", inventory: 5 },
+      { label: "2X", inventory: 4 },
+      { label: "3X", inventory: 1 },
+      { label: "4X", inventory: 0, disabled: true }
+    ],
     defaultSize: "Large",
-    media: {
-      src: "./assets/pantone-listing.png",
-      desktop: { size: "172%", position: "87% 14%" },
-      mobile: { size: "224%", position: "87% 14%" }
-    }
+    media: "./assets/crops/deadhomies-tee.png"
   }
 };
 
@@ -165,6 +157,10 @@ const cartCount = document.getElementById("bag-count");
 const cartCountMobile = document.getElementById("bag-count-mobile");
 const cartCountTitle = document.getElementById("cart-count-title");
 const subtotalValue = document.getElementById("subtotal-value");
+const shippingStatus = document.getElementById("shipping-status");
+const shippingFill = document.getElementById("shipping-fill");
+const shippingThresholdLabel = document.getElementById("shipping-threshold-label");
+const cartOutcome = document.getElementById("cart-outcome");
 
 document.getElementById("qty-minus").addEventListener("click", () => {
   state.quantity = Math.max(1, state.quantity - 1);
@@ -208,15 +204,12 @@ function formatMoney(cents) {
   return `$${(cents / 100).toFixed(2)}`;
 }
 
-function getMediaStyles(media) {
-  const mobile = window.innerWidth <= 960;
-  const crop = mobile ? media.mobile : media.desktop;
+function getProductSize(product, label) {
+  return product.sizes.find((size) => size.label === label);
+}
 
-  return {
-    backgroundImage: `url("${media.src}")`,
-    backgroundSize: crop.size,
-    backgroundPosition: crop.position
-  };
+function isLowStock(size) {
+  return size && size.inventory > 0 && size.inventory <= 5;
 }
 
 function renderStorySwitcher() {
@@ -248,18 +241,15 @@ function renderStorySwitcher() {
 function renderGallery() {
   const product = getMainProduct();
   const currentMedia = product.media[state.selectedImage];
-  const galleryStyles = getMediaStyles(currentMedia);
 
   breadcrumbLabel.textContent = getCurrentStory().breadcrumb;
-  gallery.innerHTML = `<div class="gallery-frame" style="background-image:${galleryStyles.backgroundImage};background-size:${galleryStyles.backgroundSize};background-position:${galleryStyles.backgroundPosition};"></div>`;
+  gallery.innerHTML = `<div class="gallery-frame"><img src="${currentMedia}" alt="${product.title}" /></div>`;
 
   thumbs.innerHTML = product.media
     .map((media, index) => {
-      const styles = getMediaStyles(media);
-
       return `
         <button type="button" class="thumb-button ${index === state.selectedImage ? "is-active" : ""}" data-index="${index}">
-          <div class="thumb-frame" style="background-image:${styles.backgroundImage};background-size:${styles.backgroundSize};background-position:${styles.backgroundPosition};"></div>
+          <div class="thumb-frame"><img src="${media}" alt="${product.title} thumbnail ${index + 1}" /></div>
         </button>
       `;
     })
@@ -305,6 +295,7 @@ function renderInfo() {
   productTitle.textContent = product.title;
   productPrice.textContent = formatMoney(product.price);
   selectedSizeLabel.textContent = state.mainSize;
+  shippingThresholdLabel.textContent = formatMoney(SHIPPING_THRESHOLD);
   qtyValue.textContent = state.quantity;
 
   renderColors(product);
@@ -312,8 +303,8 @@ function renderInfo() {
   mainSizeGrid.innerHTML = product.sizes
     .map(
       (size) => `
-        <button type="button" class="size-chip ${size === state.mainSize ? "is-active" : ""}" data-size="${size}">
-          ${size}
+        <button type="button" class="size-chip ${size.label === state.mainSize ? "is-active" : ""} ${isLowStock(size) && size.label !== state.mainSize ? "is-low" : ""}" data-size="${size.label}" ${size.disabled ? "disabled" : ""}>
+          ${size.label}
         </button>
       `
     )
@@ -335,38 +326,32 @@ function renderFitGrid() {
   fitGrid.innerHTML = story.bundle
     .map((key) => {
       const product = products[key];
-      const styles = getMediaStyles(product.media);
-      const selected = state.bundleSelections[key] || product.defaultSize || product.sizes[0];
-      const inCart = state.cart.some((item) => item.key === key && item.size === selected);
 
       return `
         <article class="fit-card">
-          <div class="fit-card__media" style="background-image:${styles.backgroundImage};background-size:${styles.backgroundSize};background-position:${styles.backgroundPosition};"></div>
+          <div class="fit-card__media"><img src="${product.media}" alt="${product.title}" /></div>
           <div>
             <h3 class="fit-card__title">${product.title}</h3>
             <p class="fit-card__price">${formatMoney(product.price)}</p>
-            <select class="fit-card__size" data-select="${key}">
-              ${product.sizes.map((size) => `<option value="${size}" ${selected === size ? "selected" : ""}>${size}</option>`).join("")}
-            </select>
-            <button type="button" class="fit-card__button ${inCart ? "is-added" : ""}" data-add="${key}">
-              ${inCart ? "Added" : "Add to fit"}
-            </button>
+            <div class="size-grid">
+              ${product.sizes
+                .map((size) => {
+                  const inCart = state.cart.some((item) => item.key === key && item.size === size.label);
+                  return `<button type="button" class="companion-size ${inCart ? "is-active" : ""} ${isLowStock(size) && !inCart ? "is-low" : ""}" data-add="${key}" data-size="${size.label}" ${size.disabled ? "disabled" : ""}>${size.label}</button>`;
+                })
+                .join("")}
+            </div>
+            <p class="cart-item__meta">Tap a size to add directly to cart.</p>
           </div>
         </article>
       `;
     })
     .join("");
 
-  fitGrid.querySelectorAll("[data-select]").forEach((select) => {
-    select.addEventListener("change", () => {
-      state.bundleSelections[select.dataset.select] = select.value;
-    });
-  });
-
   fitGrid.querySelectorAll("[data-add]").forEach((button) => {
     button.addEventListener("click", () => {
       const product = products[button.dataset.add];
-      const size = state.bundleSelections[product.key] || product.defaultSize || product.sizes[0];
+      const size = button.dataset.size;
 
       addToCart({
         key: product.key,
@@ -381,6 +366,10 @@ function renderFitGrid() {
 }
 
 function addToCart(entry) {
+  const product = products[entry.key];
+  const size = getProductSize(product, entry.size);
+  if (!size || size.disabled) return;
+
   const existing = state.cart.find(
     (item) => item.key === entry.key && item.size === entry.size && (item.color || "") === (entry.color || "")
   );
@@ -398,11 +387,34 @@ function addToCart(entry) {
 function renderCart() {
   const totalQuantity = state.cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const remaining = Math.max(0, SHIPPING_THRESHOLD - subtotal);
+  const fillRatio = Math.min(subtotal / SHIPPING_THRESHOLD, 1);
+  const story = getCurrentStory();
+  const mainProduct = getMainProduct();
+  const hasMain = state.cart.some((item) => item.key === mainProduct.key);
+  const hasBundle = state.cart.some((item) => story.bundle.includes(item.key));
 
   cartCount.textContent = totalQuantity;
   cartCountMobile.textContent = totalQuantity;
   cartCountTitle.textContent = totalQuantity;
   subtotalValue.textContent = formatMoney(subtotal);
+  shippingFill.style.width = `${fillRatio * 100}%`;
+
+  if (subtotal >= SHIPPING_THRESHOLD) {
+    shippingStatus.textContent = "You’ve unlocked free standard shipping.";
+  } else if (subtotal === 0) {
+    shippingStatus.textContent = "Add an item to start building toward free shipping.";
+  } else {
+    shippingStatus.textContent = `You’re ${formatMoney(remaining)} away from free standard shipping.`;
+  }
+
+  if (hasMain && hasBundle) {
+    cartOutcome.textContent = "Bundle path shown: the PDP item plus one add-on clears the free shipping threshold.";
+  } else if (hasMain) {
+    cartOutcome.textContent = "One more add-to-fit item can push this bag into free shipping.";
+  } else {
+    cartOutcome.textContent = "Start with the main PDP item, then add the fit pieces directly by size.";
+  }
 
   if (!state.cart.length) {
     cartItems.innerHTML = `<p class="cart-item__meta">Your cart is empty.</p>`;
@@ -411,12 +423,11 @@ function renderCart() {
 
   cartItems.innerHTML = state.cart
     .map((item, index) => {
-      const styles = getMediaStyles(item.media);
       const meta = [item.color, item.size].filter(Boolean).join(" / ");
 
       return `
         <article class="cart-item">
-          <div class="cart-item__media" style="background-image:${styles.backgroundImage};background-size:${styles.backgroundSize};background-position:${styles.backgroundPosition};"></div>
+          <div class="cart-item__media"><img src="${item.media}" alt="${item.title}" /></div>
           <div>
             <h3 class="cart-item__title">${item.title}</h3>
             <div class="cart-item__meta">${meta || "One Size"} · ${formatMoney(item.price)}</div>

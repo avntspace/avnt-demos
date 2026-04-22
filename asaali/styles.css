@@ -209,8 +209,17 @@ a {
 .gallery-frame {
   width: 100%;
   height: 100%;
-  background-repeat: no-repeat;
-  background-color: #fcfcfc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background: #fcfcfc;
+}
+
+.gallery-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .pdp-thumbs {
@@ -235,8 +244,17 @@ a {
 .thumb-frame {
   width: 100%;
   height: 100%;
-  background-repeat: no-repeat;
-  background-color: #fbfbfb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: #fbfbfb;
+}
+
+.thumb-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .pdp-info {
@@ -315,6 +333,33 @@ a {
   color: #ffffff;
 }
 
+.companion-size {
+  min-width: 52px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  background: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.companion-size.is-active {
+  background: #111111;
+  border-color: #111111;
+  color: #ffffff;
+}
+
+.companion-size:disabled {
+  color: #bcbcbc;
+  border-color: #efefef;
+  cursor: default;
+}
+
+.companion-size.is-low:not(.is-active) {
+  border-color: #e4b4b4;
+  color: #bb4747;
+}
+
 .quantity-stepper {
   display: inline-flex;
   align-items: center;
@@ -382,8 +427,17 @@ a {
 
 .fit-card__media {
   aspect-ratio: 0.95;
-  background-repeat: no-repeat;
-  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  padding: 10px;
+}
+
+.fit-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .fit-card__title {
@@ -396,32 +450,6 @@ a {
   margin: 8px 0 12px;
   color: var(--muted);
   font-size: 14px;
-}
-
-.fit-card__size {
-  width: 100%;
-  height: 42px;
-  border: 1px solid var(--line);
-  padding: 0 12px;
-  background: #ffffff;
-  font-size: 13px;
-}
-
-.fit-card__button {
-  width: 100%;
-  height: 42px;
-  margin-top: 10px;
-  border: 1px solid #111111;
-  background: #ffffff;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.fit-card__button.is-added {
-  background: #111111;
-  color: #ffffff;
 }
 
 .cart-overlay {
@@ -479,6 +507,70 @@ a {
   line-height: 1;
 }
 
+.shipping-progress {
+  padding: 20px 24px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.shipping-progress__copy p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #404040;
+}
+
+.shipping-progress__bar {
+  height: 6px;
+  margin-top: 14px;
+  background: #ececec;
+  overflow: hidden;
+}
+
+.shipping-progress__bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: #111111;
+}
+
+.shipping-progress__scale {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cart-alert {
+  display: flex;
+  gap: 10px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cart-alert__icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #111111;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cart-alert p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4f4f4f;
+}
+
 .cart-items {
   flex: 1;
   overflow: auto;
@@ -495,8 +587,17 @@ a {
 
 .cart-item__media {
   aspect-ratio: 0.95;
-  background-repeat: no-repeat;
-  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  padding: 8px;
+}
+
+.cart-item__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .cart-item__title {
@@ -536,6 +637,13 @@ a {
   justify-content: space-between;
   gap: 12px;
   font-size: 14px;
+}
+
+.cart-summary__caption {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .checkout-button {
@@ -611,5 +719,18 @@ a {
   .demo-switcher button {
     min-width: 0;
     flex: 1;
+  }
+
+  .shipping-progress,
+  .cart-alert,
+  .cart-summary {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .checkout-button,
+  .continue-link {
+    margin-left: 18px;
+    margin-right: 18px;
   }
 }
