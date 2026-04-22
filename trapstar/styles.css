@@ -196,13 +196,17 @@ a {
 
 .product-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 28px;
+  grid-template-columns: minmax(0, 620px) 360px;
+  gap: 36px;
+  max-width: 1048px;
+  margin: 0 auto;
   padding: 22px 20px 0 22px;
+  align-items: start;
 }
 
 .product-media {
   min-width: 0;
+  max-width: 620px;
 }
 
 .product-media__hero {
@@ -248,9 +252,10 @@ a {
 }
 
 .product-media__stack {
-  margin-top: 22px;
-  display: grid;
-  gap: 2px;
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .thumb-button {
@@ -258,11 +263,13 @@ a {
   padding: 0;
   cursor: pointer;
   background: #f8f8f8;
+  width: 74px;
+  flex: 0 0 74px;
 }
 
 .thumb-button img {
   width: 100%;
-  aspect-ratio: 1.05;
+  aspect-ratio: 0.95;
   object-fit: cover;
 }
 
@@ -462,6 +469,8 @@ a {
 
 .complete-look {
   padding: 38px 22px 48px;
+  max-width: 1048px;
+  margin: 0 auto;
 }
 
 .complete-look__header {
@@ -470,8 +479,8 @@ a {
 
 .look-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .companion-card {
@@ -490,19 +499,19 @@ a {
 }
 
 .companion-card__body {
-  padding: 14px;
+  padding: 12px;
 }
 
 .companion-card__body h4 {
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.45;
 }
 
 .companion-card__body p {
   margin: 6px 0 0;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.45;
   color: #606060;
 }
@@ -512,23 +521,24 @@ a {
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 10px;
-  font-size: 13px;
+  margin-top: 8px;
+  font-size: 12px;
 }
 
 .companion-card__meta strong {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .companion-card__sizes {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
+  gap: 6px;
+  margin-top: 10px;
 }
 
 .companion-card__hint {
-  margin-top: 10px;
+  margin-top: 8px;
+  font-size: 11px;
 }
 
 .cart-drawer-overlay {
@@ -903,11 +913,18 @@ a {
 
   .product-grid {
     grid-template-columns: 1fr;
+    max-width: none;
     padding-right: 22px;
   }
 
   .complete-look {
+    max-width: none;
     padding-bottom: 28px;
+  }
+
+  .look-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
   }
 }
 
