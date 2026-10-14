@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { post, newer, older } = Astro.props;
-const { title, description, date, updated, type, tags, draft } = post.data;
+const { title, description, date, updated, type, tags, draft, image } = post.data;
 const { Content, headings } = await render(post);
 
 // Show a table of contents on longer pieces.
@@ -19,7 +19,7 @@ const toc = headings.filter((h) => h.depth === 2);
 const showToc = toc.length >= 4;
 ---
 
-<Base title={title} description={description} type="article" publishedTime={date}>
+<Base title={title} description={description} type="article" publishedTime={date} image={image}>
   <article class="container narrow">
     <header class="post-header">
       <p class="eyebrow">

@@ -7,9 +7,10 @@ export interface Props {
   description?: string;
   type?: 'website' | 'article';
   publishedTime?: Date;
+  image?: string;
 }
 
-const { title, description = site.tagline, type = 'website', publishedTime } = Astro.props;
+const { title, description = site.tagline, type = 'website', publishedTime, image = site.photo } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : site.name;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -30,7 +31,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
-<meta name="twitter:card" content="summary" />
+{image && <meta property="og:image" content={new URL(image, Astro.site)} />}
+<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
 
 <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#121211" media="(prefers-color-scheme: dark)" />

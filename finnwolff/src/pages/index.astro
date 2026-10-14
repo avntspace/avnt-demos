@@ -31,7 +31,7 @@ const links = site.links.filter((l) => l.href);
           <a class="button" href="/about/">About Finn</a>
         </div>
       </div>
-      {site.photo && <img class="photo" src={site.photo} alt={`Portrait of ${site.name}`} />}
+      {site.photo && <img class="photo" src={site.photo} alt={`${site.name} in Times Square, New York`} />}
     </div>
   </section>
 
@@ -59,7 +59,10 @@ const links = site.links.filter((l) => l.href);
     cards.length > 0 && (
       <section class="container section">
         <div class="section-head">
-          <h2>Writing</h2>
+          <div>
+            <h2>Writing</h2>
+            <p class="blurb">{site.writingBlurb}</p>
+          </div>
           <a class="eyebrow" href="/writing/">
             All {posts.length} pieces →
           </a>
@@ -224,6 +227,10 @@ const links = site.links.filter((l) => l.href);
     aspect-ratio: 4 / 5;
     object-fit: cover;
     border-radius: 1rem;
+    box-shadow:
+      0 0 0 1px #ffffff1f,
+      0 30px 60px -20px #000c;
+    transform: rotate(1.5deg);
   }
 
   /* ---------- Sections ---------- */
@@ -247,6 +254,11 @@ const links = site.links.filter((l) => l.href);
     font-weight: 400;
     letter-spacing: -0.02em;
     line-height: 1.1;
+  }
+
+  .blurb {
+    margin: 0.5rem 0 0;
+    color: var(--ink-soft);
   }
 
   a.eyebrow {
@@ -411,8 +423,9 @@ const links = site.links.filter((l) => l.href);
     }
 
     .photo {
-      max-width: 16rem;
+      max-width: 13rem;
       grid-row: 1;
+      transform: rotate(-2deg);
     }
 
     .journey li {

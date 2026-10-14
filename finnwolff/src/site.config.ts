@@ -7,13 +7,13 @@ export const site = {
   // A few sentences for the home page intro. Plain text; blank lines start a new paragraph.
   intro: `Finn Wolff, better known as simply Wolf, is an American founder, investor, optimist, and futurist.
 
-Finn continues to build new companies at the cutting edge of technology that serve to push the culture forward and change people's lives around the world for the better.
-
-This is a working notebook: essays, notes, and analyses, published as the thinking happens.`,
+Finn continues to build new companies at the cutting edge of technology that serve to push the culture forward and change people's lives around the world for the better.`,
+  // One line under the "Writing" heading on the home page.
+  writingBlurb: 'Essays, notes, and analyses on technology, culture, and building companies.',
   // The big line in the home page hero.
   statement: 'Building a future that we can all be excited about.',
   // Path to a portrait in public/images (e.g. '/images/finn.jpg'). Leave empty to hide.
-  photo: '',
+  photo: '/images/finn.jpg',
   // The "Journey" timeline on the home page, oldest first. `href` is optional.
   journey: [
     {
@@ -38,16 +38,10 @@ This is a working notebook: essays, notes, and analyses, published as the thinki
       href: '/writing/schmooze/',
     },
     {
-      when: 'UC Berkeley',
+      when: '2017',
       title: 'Blockchain at Berkeley',
       text: 'Helped found Asset Management at Berkeley, then worked with peers in Blockchain at Berkeley to bring blockchain education to more students.',
       href: '/writing/blockchain-at-berkeley/',
-    },
-    {
-      when: 'UC Berkeley',
-      title: 'Xalted',
-      text: 'Co-founded an app that connects local guides with ski and snowboard enthusiasts looking for a lesson or a tour around an unfamiliar mountain.',
-      href: '/writing/xalted-ski-app/',
     },
     {
       when: '2019',
@@ -55,15 +49,21 @@ This is a working notebook: essays, notes, and analyses, published as the thinki
       text: 'Left UC Berkeley to build fast-growing tech companies that help disrupt and grow the next generation of fashion, art, & culture.',
     },
     {
-      when: 'Investing',
-      title: 'Investor',
-      text: 'Investments in multiple companies in the technology space, streetwear, Web3, and more.',
+      when: '2020',
+      title: 'Xalted',
+      text: 'Launched an app that connects local guides with ski and snowboard enthusiasts looking for a lesson or a tour around an unfamiliar mountain.',
+      href: '/writing/xalted-ski-app/',
     },
     {
       when: 'Since 2020',
       title: 'Philanthropy',
       text: 'Initiatives that center around providing relief for families in need, criminal justice reform, positive news organizations, and more.',
       href: '/writing/thompson-kamara-fundraiser/',
+    },
+    {
+      when: 'Today',
+      title: 'Building & investing',
+      text: 'Building new companies at the cutting edge of technology, with investments in multiple companies in the technology space, streetwear, Web3, and more.',
     },
   ] as { when: string; title: string; text: string; href?: string }[],
   url: 'https://finnwolff.com',

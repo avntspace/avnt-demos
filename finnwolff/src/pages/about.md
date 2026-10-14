@@ -1,10 +1,11 @@
 ---
 layout: ../layouts/Page.astro
 title: About
+lead: Building a future that we can all be excited about.
+image: /images/finn-wide.jpg
+imageAlt: Finn Wolff in Times Square, New York
 description: Finn Wolff started his journey as an entrepreneur at just five years old, selling candy and sodas at the back of an old barn at his grandparents' Christmas tree farm in Northern Virginia.
 ---
-
-## Building a future that we can all be excited about
 
 Finn Wolff started his journey as an entrepreneur at just five years old when he started selling candy & sodas to hungry customers at the back of an old barn at his grandparents' Christmas tree farm in Northern Virginia. This event planted the seed not only for the growth of his first business, Finn's Snack Shack, but it also planted the seeds for a future of building businesses and solving problems.
 
@@ -26,6 +27,4 @@ Outside of the business world, Finn enjoys being present with his family & frien
 
 ## This site
 
-This is where I think out loud: essays, notes, and analyses, published as the thinking happens rather than once it's finished. Writing is how I find out what I actually believe.
-
-Subscribe via [RSS](/rss.xml).
+Essays, notes, and analyses on technology, culture, and building companies. [Read the writing](/writing/), or subscribe via [RSS](/rss.xml).
