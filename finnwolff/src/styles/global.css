@@ -1,0 +1,356 @@
+@import '@fontsource-variable/newsreader/opsz.css';
+@import '@fontsource-variable/newsreader/opsz-italic.css';
+@import '@fontsource-variable/inter/index.css';
+@import '@fontsource-variable/jetbrains-mono/index.css';
+
+/* ---------- Tokens ---------- */
+
+:root {
+  --bg: #faf9f6;
+  --bg-raised: #f2f0eb;
+  --ink: #1b1a18;
+  --ink-soft: #4a4843;
+  --muted: #7a776f;
+  --rule: #e2dfd7;
+  --accent: #b4441f;
+  --accent-soft: #b4441f14;
+  --selection: #f3d9cc;
+
+  --font-serif: 'Newsreader Variable', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --measure: 42rem;
+  --wide: 56rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #121211;
+    --bg-raised: #1b1b19;
+    --ink: #ebe8e1;
+    --ink-soft: #c4c0b6;
+    --muted: #8c887e;
+    --rule: #2a2926;
+    --accent: #ef8a5f;
+    --accent-soft: #ef8a5f1a;
+    --selection: #5a2e1d;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #121211;
+  --bg-raised: #1b1b19;
+  --ink: #ebe8e1;
+  --ink-soft: #c4c0b6;
+  --muted: #8c887e;
+  --rule: #2a2926;
+  --accent: #ef8a5f;
+  --accent-soft: #ef8a5f1a;
+  --selection: #5a2e1d;
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--selection);
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(var(--wide) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.narrow {
+  max-width: calc(var(--measure) + var(--gutter) * 2);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--ink);
+  color: var(--bg);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ---------- Prose (posts and long-form pages) ---------- */
+
+.prose {
+  font-family: var(--font-serif);
+  font-size: 1.1875rem;
+  line-height: 1.7;
+  color: var(--ink);
+  font-optical-sizing: auto;
+  overflow-wrap: break-word;
+}
+
+/* :where() keeps this reset at low specificity so the spacing rules below win. */
+.prose :where(p, ul, ol, blockquote, pre, table, figure, hr) {
+  margin-block: 0;
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 2rem;
+}
+
+.prose h2 {
+  font-size: 1.6rem;
+  margin-top: 2.25em;
+}
+
+.prose h3 {
+  font-size: 1.3rem;
+  margin-top: 1.9em;
+}
+
+.prose h4 {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.75em;
+}
+
+.prose h2 + *,
+.prose h3 + *,
+.prose h4 + * {
+  margin-top: 0.6em;
+}
+
+.prose a {
+  text-decoration-color: var(--accent);
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+}
+
+.prose li + li {
+  margin-top: 0.35em;
+}
+
+.prose li::marker {
+  color: var(--muted);
+}
+
+.prose blockquote {
+  padding-left: 1.1em;
+  border-left: 2px solid var(--accent);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.prose hr {
+  border: 0;
+  height: auto;
+  text-align: center;
+  margin-block: 2.5em;
+}
+
+.prose hr::after {
+  content: '· · ·';
+  color: var(--muted);
+  letter-spacing: 0.5em;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  padding: 0.15em 0.35em;
+  background: var(--bg-raised);
+  border-radius: 4px;
+}
+
+.prose pre {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.prose pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+
+.prose .astro-code,
+.prose .astro-code span {
+  background-color: var(--bg-raised) !important;
+}
+
+:root[data-theme='dark'] .prose .astro-code,
+:root[data-theme='dark'] .prose .astro-code span {
+  color: var(--shiki-dark) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .prose .astro-code,
+  :root:not([data-theme='light']) .prose .astro-code span {
+    color: var(--shiki-dark) !important;
+  }
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  display: block;
+  overflow-x: auto;
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  padding: 0.55em 0.9em 0.55em 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.prose th {
+  font-weight: 600;
+  color: var(--ink-soft);
+  border-bottom-color: var(--ink-soft);
+}
+
+.prose img {
+  display: block;
+  border-radius: 4px;
+}
+
+/* Footnotes (GFM) */
+.prose sup a {
+  font-family: var(--font-sans);
+  font-size: 0.7em;
+  text-decoration: none;
+  color: var(--accent);
+  padding-inline: 0.1em;
+}
+
+.prose .footnotes {
+  margin-top: 3em;
+  padding-top: 1.25em;
+  border-top: 1px solid var(--rule);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.prose .footnotes h2 {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.prose .data-footnote-backref {
+  text-decoration: none;
+}

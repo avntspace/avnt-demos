@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Not found">
+  <div class="container narrow">
+    <p class="eyebrow">404</p>
+    <h1>This page doesn't exist (yet).</h1>
+    <p>Try the <a href="/writing/">writing archive</a> or head <a href="/">home</a>.</p>
+  </div>
+</Base>
+
+<style>
+  .container {
+    padding-top: clamp(3rem, 12vw, 7rem);
+  }
+
+  h1 {
+    margin: 0.75rem 0 1rem;
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  p {
+    color: var(--ink-soft);
+  }
+</style>

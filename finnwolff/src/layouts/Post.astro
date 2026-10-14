@@ -1,0 +1,239 @@
+---
+import { render } from 'astro:content';
+import Base from './Base.astro';
+import { postTypes } from '../site.config';
+import { formatDate, postUrl, readingTime, tagSlug, type Post } from '../lib/posts';
+
+interface Props {
+  post: Post;
+  newer?: Post;
+  older?: Post;
+}
+
+const { post, newer, older } = Astro.props;
+const { title, description, date, updated, type, tags, draft } = post.data;
+const { Content, headings } = await render(post);
+
+// Show a table of contents on longer pieces.
+const toc = headings.filter((h) => h.depth === 2);
+const showToc = toc.length >= 4;
+---
+
+<Base title={title} description={description} type="article" publishedTime={date}>
+  <article class="container narrow">
+    <header class="post-header">
+      <p class="eyebrow">
+        <a href={`/writing/?type=${type}`}>{postTypes[type]}</a>
+        <span aria-hidden="true">·</span>
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        <span aria-hidden="true">·</span>
+        <span>{readingTime(post.body)}</span>
+        {draft && <span class="draft">Draft</span>}
+      </p>
+      <h1>{title}</h1>
+      {description && <p class="dek">{description}</p>}
+    </header>
+
+    {
+      showToc && (
+        <details class="toc">
+          <summary>Contents</summary>
+          <ol>
+            {toc.map((h) => (
+              <li>
+                <a href={`#${h.slug}`}>{h.text}</a>
+              </li>
+            ))}
+          </ol>
+        </details>
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <footer class="post-footer">
+      {
+        updated && (
+          <p class="eyebrow">
+            Updated <time datetime={updated.toISOString()}>{formatDate(updated)}</time>
+          </p>
+        )
+      }
+      {
+        tags.length > 0 && (
+          <ul class="tags" aria-label="Tags">
+            {tags.map((tag) => (
+              <li>
+                <a href={`/tags/${tagSlug(tag)}/`}>#{tag}</a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+
+      {
+        (newer || older) && (
+          <nav class="pager" aria-label="More writing">
+            {older ? (
+              <a href={postUrl(older)} class="prev">
+                <span class="eyebrow">← Previous</span>
+                <span>{older.data.title}</span>
+              </a>
+            ) : (
+              <span />
+            )}
+            {newer && (
+              <a href={postUrl(newer)} class="next">
+                <span class="eyebrow">Next →</span>
+                <span>{newer.data.title}</span>
+              </a>
+            )}
+          </nav>
+        )
+      }
+    </footer>
+  </article>
+</Base>
+
+<style>
+  .post-header {
+    padding-top: clamp(2.5rem, 8vw, 5rem);
+    margin-bottom: 2.75rem;
+  }
+
+  .eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .eyebrow a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  h1 {
+    margin: 1rem 0 0;
+    font-family: var(--font-serif);
+    font-size: clamp(2.1rem, 6vw, 3.1rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .dek {
+    margin: 1.1rem 0 0;
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    line-height: 1.45;
+    font-style: italic;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+
+  .draft {
+    padding: 0 0.4rem;
+    border: 1px dashed var(--accent);
+    border-radius: 3px;
+    color: var(--accent);
+  }
+
+  .toc {
+    margin-bottom: 2.5rem;
+    padding: 0.9rem 1.15rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    font-size: 0.925rem;
+  }
+
+  .toc summary {
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .toc ol {
+    margin: 0.75rem 0 0.15rem;
+    padding-left: 1.25rem;
+    color: var(--muted);
+  }
+
+  .toc li + li {
+    margin-top: 0.3rem;
+  }
+
+  .toc a {
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  .post-footer {
+    margin-top: 3.5rem;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tags a {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 0.825rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  .tags a:hover {
+    border-color: var(--accent);
+  }
+
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .pager a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .pager .next {
+    grid-column: 2;
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  @media (max-width: 560px) {
+    .pager {
+      grid-template-columns: 1fr;
+    }
+
+    .pager .next {
+      grid-column: 1;
+    }
+  }
+</style>

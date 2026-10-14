@@ -1,0 +1,81 @@
+---
+title: How this site works
+description: A working example of everything a post can do. Delete this once you've published your first real piece.
+date: 2026-10-14
+type: note
+tags: [meta, writing]
+---
+
+import Aside from '../../components/Aside.astro';
+import Figure from '../../components/Figure.astro';
+
+<Aside label="Placeholder">
+  This post is an example. It exists to show what the site can do, so it can be deleted (`src/content/writing/how-this-site-works.mdx`) as soon as there's real writing here.
+</Aside>
+
+Every post is a single text file in `src/content/writing/`. Write in Markdown, set a few fields at the top, push, and it's live. There is no editor to log into and no database.
+
+## Writing a post
+
+Run `npm run new "Title of the post"` and a new draft appears with today's date. Drafts are visible while previewing locally but stay off the live site until `draft: false`. Each post declares a **type** (essay, note, or analysis), which is how the archive is filtered, and any number of **tags**, which get their own pages automatically.
+
+Regular Markdown covers most of what you'll need: *emphasis*, **bold**, [links](/writing/), lists, and quotes.
+
+> The quality of your thinking is limited by the quality of your writing. A quote looks like this.
+
+## Footnotes and asides
+
+Footnotes are useful for keeping the main line of an argument clean while still showing your work.[^1] They're collected at the bottom of the post automatically.
+
+Posts saved as `.mdx` can also use components, like the callout at the top of this page:
+
+<Aside label="Key takeaway">
+  Asides pull a point out of the flow. Use them for takeaways, caveats, or context a reader might want to skip.
+</Aside>
+
+## Tables and data
+
+Analyses often need a table. Numbers line up in columns automatically.
+
+| Scenario    | Assumption        |  Year 1 |  Year 3 |
+| ----------- | ----------------- | ------: | ------: |
+| Base case   | Current trajectory |   1,000 |   2,400 |
+| Upside      | Faster adoption   |   1,000 |   4,100 |
+| Downside    | Slower adoption   |   1,000 |   1,300 |
+
+Figures take an image (or a chart, or an embed) and a caption. Add `wide` to let a figure break out of the text column on large screens.
+
+<Figure caption="Example figure with made-up numbers. Replace with your own chart or image (put files in /public/images/)." wide>
+  <svg viewBox="0 0 640 220" role="img" aria-label="Example bar chart">
+    <g font-family="var(--font-mono)" font-size="11" fill="var(--muted)">
+      <line x1="40" y1="190" x2="630" y2="190" stroke="var(--rule)" />
+      <rect x="70" y="120" width="90" height="70" fill="var(--rule)" />
+      <rect x="210" y="90" width="90" height="100" fill="var(--rule)" />
+      <rect x="350" y="60" width="90" height="130" fill="var(--rule)" />
+      <rect x="490" y="25" width="90" height="165" fill="var(--accent)" />
+      <text x="115" y="208" text-anchor="middle">Q1</text>
+      <text x="255" y="208" text-anchor="middle">Q2</text>
+      <text x="395" y="208" text-anchor="middle">Q3</text>
+      <text x="535" y="208" text-anchor="middle">Q4</text>
+    </g>
+  </svg>
+</Figure>
+
+## Code
+
+Code is highlighted and adapts to light and dark mode.
+
+```python
+def compound(principal: float, rate: float, years: int) -> float:
+    return principal * (1 + rate) ** years
+```
+
+## Publishing
+
+When a post is ready, set `draft: false` and push. The home page, archive, topic pages, RSS feed, and sitemap all update on their own. Set `featured: true` on your best pieces to pin them under "Start here" on the home page.
+
+---
+
+That's all of it. Everything else is just writing.
+
+[^1]: Like this. Footnotes can hold sources, side-arguments, or the caveats that would otherwise interrupt.

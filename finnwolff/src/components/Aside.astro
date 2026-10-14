@@ -1,0 +1,44 @@
+---
+// A callout box for MDX posts:
+//   <Aside>Plain note.</Aside>
+//   <Aside label="Key takeaway">...</Aside>
+interface Props {
+  label?: string;
+}
+
+const { label } = Astro.props;
+---
+
+<aside class="aside">
+  {label && <p class="label">{label}</p>}
+  <div class="content"><slot /></div>
+</aside>
+
+<style>
+  .aside {
+    padding: 1rem 1.25rem;
+    background: var(--accent-soft);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-family: var(--font-sans);
+    font-size: 0.975rem;
+    line-height: 1.6;
+  }
+
+  .label {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+  }
+
+  .content > :global(*) {
+    margin: 0;
+  }
+
+  .content > :global(* + *) {
+    margin-top: 0.75em;
+  }
+</style>
