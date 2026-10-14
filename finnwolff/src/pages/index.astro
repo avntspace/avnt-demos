@@ -1,79 +1,178 @@
 ---
 import Base from '../layouts/Base.astro';
-import PostList from '../components/PostList.astro';
-import { site } from '../site.config';
-import { getPosts } from '../lib/posts';
+import { site, postTypes } from '../site.config';
+import { getPosts, postUrl, formatDate } from '../lib/posts';
 
 const posts = await getPosts();
-const featured = posts.filter((p) => p.data.featured).slice(0, 3);
-const recent = posts.filter((p) => !featured.includes(p)).slice(0, 8);
+const cards = posts.slice(0, 3);
 const paragraphs = site.intro.split(/\n\s*\n/);
+// "Founder, investor, optimist, and futurist." -> ['Founder', 'Investor', ...]
+const roles = site.tagline
+  .replace(/\.$/, '')
+  .split(/,\s*(?:and\s+)?/)
+  .map((r) => r.charAt(0).toUpperCase() + r.slice(1));
+const links = site.links.filter((l) => l.href);
 ---
 
 <Base>
-  <section class="intro container">
-    <h1>{site.name}</h1>
-    <p class="tagline">{site.tagline}</p>
-    <div class="bio">
-      {paragraphs.map((p) => <p>{p}</p>)}
+  <section class="container">
+    <div class:list={['hero', { 'has-photo': site.photo }]}>
+      <div class="hero-text">
+        <ul class="roles" aria-label="Roles">
+          {roles.map((r) => <li>{r}</li>)}
+        </ul>
+        <h1>{site.name}</h1>
+        <p class="statement">{site.statement}</p>
+        <div class="bio">
+          {paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+        <div class="actions">
+          <a class="button primary" href="/writing/">Read the writing</a>
+          <a class="button" href="/about/">About Finn</a>
+        </div>
+      </div>
+      {site.photo && <img class="photo" src={site.photo} alt={`Portrait of ${site.name}`} />}
     </div>
   </section>
 
+  <section class="container section">
+    <div class="section-head">
+      <h2>Journey</h2>
+      <a class="eyebrow" href="/about/">Full story →</a>
+    </div>
+    <ol class="journey">
+      {
+        site.journey.map((j) => (
+          <li>
+            <span class="when">{j.when}</span>
+            <div>
+              <h3>{j.href ? <a href={j.href}>{j.title}</a> : j.title}</h3>
+              <p>{j.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
   {
-    featured.length > 0 && (
+    cards.length > 0 && (
       <section class="container section">
-        <h2 class="eyebrow">Start here</h2>
-        <PostList posts={featured} />
+        <div class="section-head">
+          <h2>Writing</h2>
+          <a class="eyebrow" href="/writing/">
+            All {posts.length} pieces →
+          </a>
+        </div>
+        <ul class="cards">
+          {cards.map((post) => (
+            <li>
+              <a href={postUrl(post)}>
+                {post.data.image && <img src={post.data.image} alt="" loading="lazy" />}
+                <span class="meta">
+                  {formatDate(post.data.date, 'short')} · {postTypes[post.data.type]}
+                </span>
+                <span class="title">{post.data.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
     )
   }
 
-  <section class="container section">
-    <div class="section-head">
-      <h2 class="eyebrow">Recent writing</h2>
-      {posts.length > 0 && <a class="eyebrow" href="/writing/">All writing →</a>}
-    </div>
-    {
-      recent.length > 0 ? (
-        <PostList posts={recent} />
-      ) : (
-        <p class="empty">Nothing published yet.</p>
-      )
-    }
-  </section>
+  {
+    links.length > 0 && (
+      <section class="container section">
+        <div class="connect">
+          <h2>Say hello</h2>
+          <nav aria-label="Connect">
+            {site.email && <a href={`mailto:${site.email}`}>Email ↗</a>}
+            {links.map((l) => (
+              <a href={l.href} rel="me">
+                {l.label} ↗
+              </a>
+            ))}
+          </nav>
+        </div>
+      </section>
+    )
+  }
 </Base>
 
 <style>
-  .intro {
-    padding-top: clamp(3rem, 12vw, 7.5rem);
-    padding-bottom: clamp(2.5rem, 7vw, 4.5rem);
+  /* ---------- Hero ---------- */
+
+  .hero {
+    --hero-ink: #f4f1ea;
+    --hero-soft: #b9b4a8;
+    position: relative;
+    display: grid;
+    gap: 2.5rem;
+    margin-top: 0.5rem;
+    padding: clamp(2.25rem, 7vw, 5rem) clamp(1.5rem, 6vw, 4.5rem);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    color: var(--hero-ink);
+    /* Keeps the panel's edge visible against the dark theme's background. */
+    box-shadow: inset 0 0 0 1px #ffffff12;
+    background:
+      radial-gradient(60rem 30rem at 110% -10%, #b4441f66, transparent 60%),
+      radial-gradient(40rem 24rem at -20% 120%, #3a2a6a55, transparent 60%),
+      #141311;
+  }
+
+  .hero.has-photo {
+    grid-template-columns: 1fr minmax(12rem, 20rem);
+    align-items: center;
+  }
+
+  .roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .roles li {
+    padding: 0.3rem 0.75rem;
+    border: 1px solid #ffffff2b;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hero-ink);
+    background: #ffffff0d;
   }
 
   h1 {
     margin: 0;
     font-family: var(--font-serif);
-    font-size: clamp(2.75rem, 9vw, 5rem);
+    font-size: clamp(3.25rem, 12vw, 7rem);
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.03em;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
   }
 
-  .tagline {
-    max-width: 34rem;
+  .statement {
+    max-width: 30rem;
     margin: 1.25rem 0 0;
     font-family: var(--font-serif);
-    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    font-size: clamp(1.4rem, 3.4vw, 1.9rem);
     font-style: italic;
-    line-height: 1.35;
-    color: var(--ink-soft);
-    text-wrap: pretty;
+    line-height: 1.25;
+    color: #ef8a5f;
+    text-wrap: balance;
   }
 
   .bio {
-    max-width: var(--measure);
-    margin-top: 2rem;
-    color: var(--ink-soft);
-    font-size: 1.05rem;
+    max-width: 36rem;
+    margin-top: 1.75rem;
+    color: var(--hero-soft);
+    font-size: 1.025rem;
   }
 
   .bio p {
@@ -81,33 +180,248 @@ const paragraphs = site.intro.split(/\n\s*\n/);
   }
 
   .bio p + p {
-    margin-top: 0.9rem;
+    margin-top: 0.85rem;
   }
 
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid #ffffff33;
+    border-radius: 999px;
+    font-size: 0.925rem;
+    font-weight: 500;
+    color: var(--hero-ink);
+    text-decoration: none;
+  }
+
+  .button:hover {
+    color: var(--hero-ink);
+    border-color: var(--hero-ink);
+  }
+
+  .button.primary {
+    border-color: var(--hero-ink);
+    background: var(--hero-ink);
+    color: #141311;
+  }
+
+  .button.primary:hover {
+    background: #ef8a5f;
+    border-color: #ef8a5f;
+    color: #141311;
+  }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+
+  /* ---------- Sections ---------- */
+
   .section {
-    margin-top: 2.5rem;
+    margin-top: clamp(4rem, 10vw, 6.5rem);
   }
 
   .section-head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
   }
 
-  .eyebrow {
-    margin: 0 0 1rem;
+  h2 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 2.75rem);
     font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
 
   a.eyebrow {
     text-decoration: none;
+    white-space: nowrap;
   }
 
   a.eyebrow:hover {
     color: var(--accent);
   }
 
-  .empty {
+  /* ---------- Journey ---------- */
+
+  .journey {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .journey li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 0.25rem 1.75rem;
+    padding: 0 0 2rem 1.75rem;
+    border-left: 1px solid var(--rule);
+  }
+
+  .journey li:last-child {
+    padding-bottom: 0;
+  }
+
+  .journey li::before {
+    content: '';
+    position: absolute;
+    left: -0.3rem;
+    top: 0.45rem;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+
+  .when {
+    padding-top: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .journey h3 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .journey h3 a {
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+  }
+
+  .journey p {
+    max-width: 36rem;
+    margin: 0.3rem 0 0;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Writing cards ---------- */
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cards a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  .cards img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 0.9rem;
+    background: var(--bg-raised);
+    transition: transform 0.3s ease;
+  }
+
+  .cards a:hover img {
+    transform: translateY(-3px);
+  }
+
+  .meta {
+    margin-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     color: var(--muted);
+  }
+
+  .title {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    line-height: 1.25;
+    color: var(--ink);
+    text-wrap: pretty;
+    transition: color 0.15s;
+  }
+
+  .cards a:hover .title {
+    color: var(--accent);
+  }
+
+  /* ---------- Connect ---------- */
+
+  .connect {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding: clamp(1.75rem, 5vw, 2.75rem);
+    border-radius: 1.5rem;
+    background: var(--bg-raised);
+  }
+
+  .connect nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .connect nav a {
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--bg);
+    font-size: 0.925rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .connect nav a:hover {
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 760px) {
+    .hero.has-photo {
+      grid-template-columns: 1fr;
+    }
+
+    .photo {
+      max-width: 16rem;
+      grid-row: 1;
+    }
+
+    .journey li {
+      grid-template-columns: 1fr;
+    }
+
+    .cards {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
   }
 </style>

@@ -8,6 +8,8 @@ const writing = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
+    // Cover image path (e.g. /images/writing/my-post.webp), used on cards.
+    image: z.string().optional(),
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
     type: z.enum(Object.keys(postTypes) as [keyof typeof postTypes]).default('essay'),

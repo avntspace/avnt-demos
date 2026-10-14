@@ -2,6 +2,7 @@
 title: "How A Young Entrepreneur Is Disrupting Finance & Blockchain Tech At Berkeley"
 description: "\"Blockchain\" is a word that most people's grandparents have heard in 2022, but back in 2017 when Finn Wolff was a Freshman at Berkeley, it was unfamiliar territory for most."
 date: 2021-01-27
+image: /images/writing/blockchain-at-berkeley.webp
 type: essay
 tags: [berkeley, blockchain, startups]
 ---

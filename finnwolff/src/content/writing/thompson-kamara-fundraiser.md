@@ -2,6 +2,7 @@
 title: "Finn Wolff Helps Raise Thousands After Best Friend Loses His Life"
 description: "Some friends are only in your life for seasons, while others are there for a lifetime."
 date: 2021-06-05
+image: /images/writing/thompson-kamara-fundraiser.webp
 type: essay
 tags: [philanthropy]
 ---

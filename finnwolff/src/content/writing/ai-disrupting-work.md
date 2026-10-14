@@ -2,6 +2,7 @@
 title: "How AI Is Disrupting The Way We Work Today"
 description: "ChatGPT is one of the first breakthrough consumer facing AI tools that was launched on November 30th, 2022."
 date: 2022-12-20
+image: /images/writing/ai-disrupting-work.webp
 type: analysis
 tags: [technology, ai]
 ---

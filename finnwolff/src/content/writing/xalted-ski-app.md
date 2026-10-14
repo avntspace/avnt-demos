@@ -2,6 +2,7 @@
 title: "UC Berkeley Student Finn Wolff Launches Ski App Xalted"
 description: "“Welcome to Snowbird sir,” you’re greeted as you and your family leave your condo in Snowbird, Utah to hit the slopes."
 date: 2020-03-20
+image: /images/writing/xalted-ski-app.webp
 type: essay
 tags: [berkeley, startups]
 ---

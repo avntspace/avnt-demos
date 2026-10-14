@@ -2,6 +2,7 @@
 title: "The Future of E-commerce: How Technology Will Change The Way We Shop"
 description: "The e-commerce industry has come a long way since Jeff Bezos was packing and selling the first books from Amazon in the early days of the internet."
 date: 2023-01-18
+image: /images/writing/future-of-ecommerce.webp
 type: analysis
 tags: [technology, ecommerce]
 ---

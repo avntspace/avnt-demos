@@ -2,6 +2,7 @@
 title: "My Thoughts After Spending A Month In The Metaverse"
 description: "I’m running full speed ahead as I dive behind the wall below the window in front of me."
 date: 2022-02-23
+image: /images/writing/a-month-in-the-metaverse.webp
 type: essay
 tags: [technology, metaverse]
 ---

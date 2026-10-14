@@ -2,6 +2,7 @@
 title: "UC Berkeley Student Finn Wolff Helps Launch College Social App Schmooze"
 description: "Moving from your hometown to a completely new state and starting college in a place where you don’t know anyone isn’t easy, yet many young adults across the country take this leap of faith every year."
 date: 2019-10-11
+image: /images/writing/schmooze.webp
 type: essay
 tags: [berkeley, startups]
 ---
