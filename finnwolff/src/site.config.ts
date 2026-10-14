@@ -3,9 +3,11 @@
 export const site = {
   name: 'Finn Wolff',
   // Shown under your name on the home page and used as the default meta description.
-  tagline: 'TODO: one line on what you work on and think about.',
+  tagline: 'Founder, investor, optimist, and futurist.',
   // A few sentences for the home page intro. Plain text; blank lines start a new paragraph.
-  intro: `TODO: a short introduction. Who you are, what you're building, and what you write about here.
+  intro: `Finn Wolff, better known as simply Wolf, is an American founder, investor, optimist, and futurist.
+
+Finn continues to build new companies at the cutting edge of technology that serve to push the culture forward and change people's lives around the world for the better.
 
 This is a working notebook: essays, notes, and analyses, published as the thinking happens.`,
   url: 'https://finnwolff.com',
@@ -13,9 +15,9 @@ This is a working notebook: essays, notes, and analyses, published as the thinki
   email: '', // e.g. 'hello@finnwolff.com' (leave empty to hide)
   // Links shown in the footer and on the About page. Remove any you don't use.
   links: [
-    { label: 'X', href: '' },
-    { label: 'LinkedIn', href: '' },
-    { label: 'GitHub', href: '' },
+    { label: 'X', href: 'https://twitter.com/finnwolff_' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/finnwolff/' },
+    { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=100079617141099' },
   ],
   nav: [
     { label: 'Writing', href: '/writing/' },
