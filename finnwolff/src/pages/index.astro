@@ -53,20 +53,32 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
   </div>
 
   <section id="companies" class="container section">
-    <p class="eyebrow label">[ 01 ] Companies</p>
+    <p class="eyebrow label">[ 01 ] Work</p>
     <ol class="companies">
       {
         site.companies.map((co) => (
           <li data-reveal>
-            <a href={co.href}>
-              <span class="name">{co.name}</span>
-              <span class="about">
-                <span class="text">{co.text}</span>
-                <span class="eyebrow site">
-                  {new URL(co.href).host + new URL(co.href).pathname.replace(/\/$/, '')} <span aria-hidden="true">↗</span>
+            {co.href ? (
+              <a class="row" href={co.href}>
+                <span class="name">{co.name}</span>
+                <span class="about">
+                  {co.role && <span class="eyebrow role">{co.role}</span>}
+                  <span class="text">{co.text}</span>
+                  <span class="eyebrow site">
+                    {new URL(co.href).host + new URL(co.href).pathname.replace(/\/$/, '')}{' '}
+                    <span aria-hidden="true">↗</span>
+                  </span>
                 </span>
-              </span>
-            </a>
+              </a>
+            ) : (
+              <div class="row">
+                <span class="name">{co.name}</span>
+                <span class="about">
+                  {co.role && <span class="eyebrow role">{co.role}</span>}
+                  <span class="text">{co.text}</span>
+                </span>
+              </div>
+            )}
           </li>
         ))
       }
@@ -300,7 +312,7 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
     border-bottom: 1px solid var(--rule);
   }
 
-  .companies a {
+  .companies .row {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
     align-items: end;
@@ -339,6 +351,10 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
 
   .companies .site {
     color: var(--ink);
+  }
+
+  .companies .role {
+    color: var(--accent);
   }
 
   .companies .site span {
@@ -508,7 +524,7 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
     }
 
     .entry,
-    .companies a {
+    .companies .row {
       grid-template-columns: 1fr;
     }
 

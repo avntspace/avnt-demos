@@ -10,8 +10,8 @@ export const site = {
   statement: ['Building a future', 'that we can all be', '*excited* about.'],
   // The paragraph under the headline.
   intro:
-    'Finn Wolff, better known as simply Wolf, is a founder and investor. He builds AVNT and AVNT Scale, media and marketing companies for the next generation of fashion and streetwear brands.',
-  // The companies section on the home page.
+    'Finn Wolff, better known as simply Wolf, is a founder and investor. He builds AVNT and AVNT Scale, media and marketing companies for the next generation of fashion and streetwear brands, and co-founded The Freedom Alliance, a nonprofit fighting child trafficking.',
+  // The work section on the home page. `href` and `role` are optional.
   companies: [
     {
       name: 'AVNT',
@@ -23,7 +23,12 @@ export const site = {
       href: 'https://avnt.space/scale',
       text: 'The digital marketing platform top brands, designers and creatives trust for massive growth that stays tasteful and true to the brand they built.',
     },
-  ],
+    {
+      name: 'The Freedom Alliance',
+      role: 'President & Co-Founder · Nonprofit',
+      text: 'Dedicated to helping save victims of child trafficking around the world and fighting for criminal justice reform.',
+    },
+  ] as { name: string; text: string; href?: string; role?: string }[],
   // Scrolling ticker on the home page.
   worlds: ['Technology', 'Fashion', 'Art', 'Culture', 'Streetwear', 'Web3'],
   // Path to a photo in public/images. Leave empty to hide.
@@ -76,6 +81,12 @@ export const site = {
       title: 'Whomps World',
       text: 'A charitable clothing release with friends in memory of Thompson Kamara. The proceeds went to his family.',
       href: '/writing/thompson-kamara-fundraiser/',
+    },
+    {
+      when: '2023',
+      title: 'The Freedom Alliance',
+      text: 'Co-founded a nonprofit dedicated to helping save victims of child trafficking around the world and fighting for criminal justice reform. He serves as President.',
+      href: '#companies',
     },
     {
       when: 'Now',
