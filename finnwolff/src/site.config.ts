@@ -16,6 +16,7 @@ export const site = {
     {
       name: 'AVNT',
       href: 'https://avnt.space',
+      role: 'Founder & CEO',
       text: 'One of the biggest media companies promoting next-generation brands and creatives.',
     },
     {
