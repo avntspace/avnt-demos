@@ -80,6 +80,11 @@ body {
   overflow-x: clip;
 }
 
+/* Keep anchor targets clear of the sticky header. */
+[id] {
+  scroll-margin-top: 4.5rem;
+}
+
 a {
   color: inherit;
   text-decoration-color: var(--rule);

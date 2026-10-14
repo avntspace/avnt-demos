@@ -4,7 +4,6 @@ import { site, postTypes } from '../site.config';
 import { getPosts, postUrl } from '../lib/posts';
 
 const posts = await getPosts();
-const pad = (n: number) => String(n).padStart(2, '0');
 // '*excited* about.' -> ['', 'excited', ' about.']: odd entries get highlighted.
 const split = (line: string) => line.split('*');
 const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
@@ -32,7 +31,7 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
 
     <div class="hero-foot">
       <p class="intro">{site.intro}</p>
-      <a class="eyebrow scroll" href="#story">[ The story <span aria-hidden="true">↓</span> ]</a>
+      <a class="eyebrow scroll" href="#timeline">[ Timeline <span aria-hidden="true">↓</span> ]</a>
     </div>
   </section>
 
@@ -53,29 +52,17 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
     </div>
   </div>
 
-  <section id="story" class="container section">
-    <p class="eyebrow label">[ 01 ] The story</p>
-    <ol class="chapters">
+  <section id="timeline" class="container section">
+    <p class="eyebrow label">[ 01 ] Timeline</p>
+    <ol class="timeline">
       {
-        site.story.map((c, i) => (
+        site.story.map((c) => (
           <>
-            <li class="chapter" data-reveal>
-              <div class="marker">
-                <span class="num">{pad(i + 1)}</span>
-                <span class="eyebrow when">{c.when}</span>
-              </div>
+            <li class="entry" data-reveal>
+              <span class="when">{c.when}</span>
               <div class="body">
-                <h2>{c.title}</h2>
+                <h2>{c.href ? <a href={c.href}>{c.title}</a> : c.title}</h2>
                 <p>{c.text}</p>
-                {c.links && (
-                  <p class="more">
-                    {c.links.map((l) => (
-                      <a href={l.href}>
-                        {l.label} <span aria-hidden="true">→</span>
-                      </a>
-                    ))}
-                  </p>
-                )}
               </div>
             </li>
             {c.photo && site.photo && (
@@ -283,82 +270,66 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
     text-decoration: none;
   }
 
-  /* ---------- Story ---------- */
+  /* ---------- Timeline ---------- */
 
-  .chapters {
+  .timeline {
     margin: 0;
     padding: 0;
     list-style: none;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .chapter {
+  .entry {
     display: grid;
     grid-template-columns: minmax(8rem, 1fr) 2.2fr;
-    gap: 1rem clamp(1.5rem, 4vw, 4rem);
-    padding-block: clamp(2.25rem, 5vw, 4rem);
+    gap: 0.5rem clamp(1.5rem, 4vw, 4rem);
+    padding-block: clamp(1.75rem, 3.5vw, 2.5rem);
     border-top: 1px solid var(--rule);
   }
 
-  .marker {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .num {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 6rem);
-    font-weight: 700;
-    line-height: 0.85;
-    letter-spacing: -0.05em;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--muted);
-  }
-
   .when {
-    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: var(--muted);
   }
 
   .body h2 {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(2.25rem, 5.5vw, 4.75rem);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
     font-weight: 600;
-    line-height: 0.95;
-    letter-spacing: -0.045em;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+
+  .body h2 a {
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+
+  .body h2 a:hover {
+    color: var(--ink);
+    text-decoration-color: var(--accent);
   }
 
   .body p {
     max-width: 36rem;
-    margin: 1.25rem 0 0;
-    font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+    margin: 0.6rem 0 0;
+    font-size: clamp(1.02rem, 1.5vw, 1.15rem);
     line-height: 1.55;
     color: var(--ink-soft);
-  }
-
-  .body .more {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .more a {
-    color: var(--ink);
-    text-decoration: none;
-  }
-
-  .more a span {
-    color: var(--accent);
   }
 
   /* Full-bleed photo that comes into color as it scrolls in. */
   .photo {
     margin-inline: calc(50% - 50vw);
-    padding-bottom: clamp(2.25rem, 5vw, 4rem);
+    padding-block: clamp(1rem, 2vw, 1.5rem) clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--rule);
   }
 
   .photo figure {
@@ -455,14 +426,17 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
       align-items: flex-start;
     }
 
-    .chapter {
+    .entry {
       grid-template-columns: 1fr;
     }
 
-    .marker {
-      flex-direction: row;
-      align-items: baseline;
-      gap: 1rem;
+    .when {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
     }
 
     .index a {
