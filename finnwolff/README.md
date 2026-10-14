@@ -27,7 +27,7 @@ Posts live in `src/content/writing/`. The file name becomes the URL (`my-post.md
 | `featured`    |          | `true` pins it under "Start here" on the home page                         |
 | `updated`     |          | Shows "Updated …" at the bottom                                            |
 
-See `src/content/writing/_template.md` for a copy-paste starting point, and the example post `how-this-site-works.mdx` for footnotes, tables, code, callouts (`<Aside>`), and figures (`<Figure>`). Delete the example once real posts exist.
+See `src/content/writing/_template.md` for a copy-paste starting point. MDX posts (`.mdx`) can also use callouts (`<Aside>`) and figures (`<Figure>`) from `src/components/`.
 
 Images go in `public/images/` and are referenced as `/images/name.png`.
 
