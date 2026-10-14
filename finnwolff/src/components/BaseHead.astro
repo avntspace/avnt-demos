@@ -34,13 +34,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
 <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
 
-<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#121211" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#0a0a09" />
 
 <script is:inline>
-  // Apply a saved theme choice before first paint so there is no flash.
-  try {
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
-  } catch {}
+  // Lets CSS hide scroll-reveal content only when JS is there to reveal it.
+  document.documentElement.classList.add('js');
 </script>

@@ -33,7 +33,7 @@ Images go in `public/images/` and are referenced as `/images/name.png`.
 
 ### Editing the rest
 
-- **Name, tagline, intro, links, nav:** `src/site.config.ts`
+- **Name, headline, intro, story chapters, photo, links, nav:** `src/site.config.ts`
 - **About page:** `src/pages/about.md` (plain Markdown)
 - **Colors and typography:** the tokens at the top of `src/styles/global.css`
 
@@ -45,12 +45,12 @@ src/
   content/writing/      posts (.md or .mdx)
   pages/                home, writing archive, tags, about, rss.xml, 404
   layouts/              Base (shell), Post, Page
-  components/           Header, Footer, PostList, Aside, Figure, ThemeToggle
+  components/           Header, Footer, PostList, Aside, Figure
   styles/global.css     design tokens, light/dark themes, post typography
 public/                 favicon, robots.txt, images
 ```
 
-Included: light/dark mode (follows the system, with a toggle), RSS at `/rss.xml`, sitemap, canonical/Open Graph tags, reading time, an automatic table of contents on long posts, archive filtering by type, and tag pages. Fonts (Newsreader, Inter, JetBrains Mono) are self-hosted, so there are no third-party requests.
+Included: a single dark theme with scroll reveals (respects reduced-motion), RSS at `/rss.xml`, sitemap, canonical/Open Graph tags, reading time, an automatic table of contents on long posts, archive filtering by type, and tag pages. Fonts (Inter Tight, Inter, Instrument Serif, JetBrains Mono) are self-hosted, so there are no third-party requests.
 
 ## Deploying (moving off Squarespace)
 

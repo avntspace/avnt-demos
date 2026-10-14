@@ -5,37 +5,105 @@ const links = site.links.filter((l) => l.href);
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer container">
-  <span>© {year} {site.name}</span>
-  <nav aria-label="Elsewhere">
-    {site.email && <a href={`mailto:${site.email}`}>Email</a>}
-    {links.map((l) => <a href={l.href} rel="me">{l.label}</a>)}
-    <a href="/rss.xml">RSS</a>
-  </nav>
+<footer class="site-footer" id="contact">
+  <div class="container">
+    <p class="eyebrow">[ Say hello ]</p>
+    <ul class="links">
+      {
+        site.email && (
+          <li>
+            <a href={`mailto:${site.email}`}>
+              Email <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        )
+      }
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href} rel="me">
+              {l.label} <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="meta">
+      <span>© {year} {site.name}</span>
+      <a href="/rss.xml">RSS</a>
+    </div>
+  </div>
+  <p class="giant" aria-hidden="true">{site.alias}</p>
 </footer>
 
 <style>
   .site-footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.75rem 1.5rem;
-    margin-top: 6rem;
-    padding-top: 1.75rem;
-    padding-bottom: 2.5rem;
-    font-size: 0.85rem;
-    color: var(--muted);
-    /* Top rule drawn inside the gutters */
-    background: linear-gradient(var(--rule), var(--rule)) no-repeat var(--gutter) 0 / calc(100% - var(--gutter) * 2) 1px;
+    position: relative;
+    margin-top: clamp(6rem, 14vw, 11rem);
+    padding-top: clamp(2.5rem, 6vw, 4rem);
+    border-top: 1px solid var(--rule);
+    overflow: hidden;
   }
 
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.25rem;
+  .eyebrow {
+    margin: 0 0 1.5rem;
   }
 
-  a {
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem clamp(1.5rem, 4vw, 3.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .links a {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 5vw, 3.5rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
     text-decoration: none;
+  }
+
+  .links span {
+    display: inline-block;
+    color: var(--accent);
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .links a:hover span {
+    transform: translate(4px, -4px);
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta a {
+    text-decoration: none;
+  }
+
+  /* The sign-off: the name everyone actually uses, cropped by the page edge. */
+  .giant {
+    margin: 1.5rem 0 -0.2em;
+    font-family: var(--font-display);
+    font-size: 33vw;
+    font-weight: 800;
+    line-height: 0.8;
+    letter-spacing: -0.06em;
+    text-align: center;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1px #4a4740;
+    user-select: none;
   }
 </style>

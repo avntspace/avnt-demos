@@ -2,80 +2,82 @@
 
 export const site = {
   name: 'Finn Wolff',
-  // Shown under your name on the home page and used as the default meta description.
+  // What people actually call you. Signs off every page.
+  alias: 'Wolf',
+  // Default meta description and link-preview text.
   tagline: 'Founder, investor, optimist, and futurist.',
-  // A few sentences for the home page intro. Plain text; blank lines start a new paragraph.
-  intro: `Finn Wolff, better known as simply Wolf, is an American founder, investor, optimist, and futurist.
-
-Finn continues to build new companies at the cutting edge of technology that serve to push the culture forward and change people's lives around the world for the better.`,
-  // One line under the "Writing" heading on the home page.
-  writingBlurb: 'Essays, notes, and analyses on technology, culture, and building companies.',
-  // The big line in the home page hero.
-  statement: 'Building a future that we can all be excited about.',
-  // Path to a portrait in public/images (e.g. '/images/finn.jpg'). Leave empty to hide.
-  photo: '/images/finn.jpg',
-  // The "Journey" timeline on the home page, oldest first. `href` is optional.
-  journey: [
+  // The home page headline. Wrap the word to highlight in *asterisks*; each line is a row.
+  statement: ['Building a future', 'that we can all be', '*excited* about.'],
+  // The paragraph under the headline.
+  intro:
+    'Finn Wolff, better known as simply Wolf, is an American founder, investor, optimist, and futurist, building at the cutting edge of technology to push fashion, art & culture forward.',
+  // Scrolling ticker on the home page.
+  worlds: ['Technology', 'Fashion', 'Art', 'Culture', 'Streetwear', 'Web3'],
+  // Path to a photo in public/images. Leave empty to hide.
+  photo: '/images/finn-wide.jpg',
+  photoCaption: 'Times Square, New York',
+  // The story on the home page, in order. `href` links to the full piece.
+  story: [
     {
       when: 'Age 5',
-      title: "Finn's Snack Shack",
-      text: "Selling candy & sodas to hungry customers at the back of an old barn at his grandparents' Christmas tree farm in Northern Virginia.",
+      title: 'The barn.',
+      text: "Selling candy & sodas to hungry customers at the back of an old barn on his grandparents' Christmas tree farm in Northern Virginia. Finn's Snack Shack planted the seed for a future of building businesses and solving problems.",
     },
     {
       when: 'High school',
-      title: 'Electronics on eBay',
-      text: 'Buying old iPhones, gaming consoles and electronics from friends and people at school, and re-selling them on eBay for a profit.',
+      title: 'The iPhone.',
+      text: 'Inspired by the launch of the iPhone, he bought old iPhones, gaming consoles and electronics from friends and people at school, and re-sold them on eBay for a profit.',
     },
     {
       when: '2016',
-      title: 'Taught himself to code',
-      text: 'Websites first, then Swift to build iOS apps, with little money to invest in hiring a developer.',
+      title: 'Self-taught.',
+      text: 'With little money to hire a developer, he taught himself to code. Websites first, then Swift to build iOS apps.',
     },
     {
       when: '2017',
-      title: 'Schmooze',
-      text: 'Co-founded a college social app at UC Berkeley that grew to a team of over 10 undergraduates and thousands of users.',
-      href: '/writing/schmooze/',
-    },
-    {
-      when: '2017',
-      title: 'Blockchain at Berkeley',
-      text: 'Helped found Asset Management at Berkeley, then worked with peers in Blockchain at Berkeley to bring blockchain education to more students.',
-      href: '/writing/blockchain-at-berkeley/',
+      title: 'Berkeley.',
+      text: 'At UC Berkeley he co-founded Schmooze, a college social app that reached thousands of users, and helped bring blockchain education to more students. Later came Xalted, an app connecting skiers with local guides.',
+      links: [
+        { label: 'Schmooze', href: '/writing/schmooze/' },
+        { label: 'Blockchain', href: '/writing/blockchain-at-berkeley/' },
+        { label: 'Xalted', href: '/writing/xalted-ski-app/' },
+      ],
     },
     {
       when: '2019',
-      title: 'Building full time',
-      text: 'Left UC Berkeley to build fast-growing tech companies that help disrupt and grow the next generation of fashion, art, & culture.',
+      title: 'The leap.',
+      text: 'He dropped out of UC Berkeley to build full time: fast-growing tech companies that help disrupt and grow the next generation of fashion, art, & culture.',
+      photo: true,
     },
     {
       when: '2020',
-      title: 'Xalted',
-      text: 'Launched an app that connects local guides with ski and snowboard enthusiasts looking for a lesson or a tour around an unfamiliar mountain.',
-      href: '/writing/xalted-ski-app/',
-    },
-    {
-      when: 'Since 2020',
-      title: 'Philanthropy',
-      text: 'Initiatives that center around providing relief for families in need, criminal justice reform, positive news organizations, and more.',
-      href: '/writing/thompson-kamara-fundraiser/',
+      title: 'Thompson.',
+      text: 'After losing one of his best friends, Thompson Kamara, to gun violence at the end of 2020, Finn started philanthropic initiatives for families in need, criminal justice reform, and positive news.',
+      links: [{ label: 'Read the story', href: '/writing/thompson-kamara-fundraiser/' }],
     },
     {
       when: 'Today',
-      title: 'Building & investing',
-      text: 'Building new companies at the cutting edge of technology, with investments in multiple companies in the technology space, streetwear, Web3, and more.',
+      title: "What's next.",
+      text: "Building new companies at the cutting edge of technology that push the culture forward, inspire humanity to get excited about a brighter future, and change people's lives around the world for the better. Investing across technology, streetwear, Web3, and more.",
     },
-  ] as { when: string; title: string; text: string; href?: string }[],
+  ] as {
+    when: string;
+    title: string;
+    text: string;
+    links?: { label: string; href: string }[];
+    photo?: boolean;
+  }[],
   url: 'https://finnwolff.com',
   locale: 'en-US',
   email: '', // e.g. 'hello@finnwolff.com' (leave empty to hide)
-  // Links shown in the footer and on the About page. Remove any you don't use.
+  // Links shown in the footer. Remove any you don't use.
   links: [
     { label: 'X', href: 'https://twitter.com/finnwolff_' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/finnwolff/' },
     { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=100079617141099' },
   ],
   nav: [
+    { label: 'Story', href: '/#story' },
     { label: 'Writing', href: '/writing/' },
     { label: 'About', href: '/about/' },
   ],

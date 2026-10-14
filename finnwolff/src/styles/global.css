@@ -1,57 +1,32 @@
-@import '@fontsource-variable/newsreader/opsz.css';
-@import '@fontsource-variable/newsreader/opsz-italic.css';
+@import '@fontsource-variable/inter-tight/index.css';
 @import '@fontsource-variable/inter/index.css';
+@import '@fontsource/instrument-serif/400-italic.css';
 @import '@fontsource-variable/jetbrains-mono/index.css';
 
 /* ---------- Tokens ---------- */
 
+/* One theme on purpose: dark, with a single signal color. */
 :root {
-  --bg: #faf9f6;
-  --bg-raised: #f2f0eb;
-  --ink: #1b1a18;
-  --ink-soft: #4a4843;
-  --muted: #7a776f;
-  --rule: #e2dfd7;
-  --accent: #b4441f;
-  --accent-soft: #b4441f14;
-  --selection: #f3d9cc;
+  --bg: #0a0a09;
+  --bg-raised: #151513;
+  --ink: #f1efe9;
+  --ink-soft: #b9b5ab;
+  --muted: #7b776f;
+  --rule: #272623;
+  --accent: #ff5b14;
+  --accent-soft: #ff5b141f;
+  --selection: #ff5b1459;
 
-  --font-serif: 'Newsreader Variable', 'Iowan Old Style', Georgia, serif;
+  --font-display: 'Inter Tight Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
 
-  --measure: 42rem;
-  --wide: 56rem;
-  --gutter: clamp(1rem, 4vw, 2rem);
+  --measure: 40rem;
+  --wide: 80rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-  color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --bg: #121211;
-    --bg-raised: #1b1b19;
-    --ink: #ebe8e1;
-    --ink-soft: #c4c0b6;
-    --muted: #8c887e;
-    --rule: #2a2926;
-    --accent: #ef8a5f;
-    --accent-soft: #ef8a5f1a;
-    --selection: #5a2e1d;
-    color-scheme: dark;
-  }
-}
-
-:root[data-theme='dark'] {
-  --bg: #121211;
-  --bg-raised: #1b1b19;
-  --ink: #ebe8e1;
-  --ink-soft: #c4c0b6;
-  --muted: #8c887e;
-  --rule: #2a2926;
-  --accent: #ef8a5f;
-  --accent-soft: #ef8a5f1a;
-  --selection: #5a2e1d;
   color-scheme: dark;
 }
 
@@ -82,12 +57,27 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 ::selection {
   background: var(--selection);
 }
 
 main {
   flex: 1;
+}
+
+html,
+body {
+  overflow-x: clip;
 }
 
 a {
@@ -129,10 +119,32 @@ video {
 
 .eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+/* Scroll reveal. Only hides content once JS has confirmed it can show it again. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+}
+
+.js [data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .sr-only {
@@ -164,11 +176,10 @@ video {
 /* ---------- Prose (posts and long-form pages) ---------- */
 
 .prose {
-  font-family: var(--font-serif);
-  font-size: 1.1875rem;
-  line-height: 1.7;
-  color: var(--ink);
-  font-optical-sizing: auto;
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: #dedbd3;
   overflow-wrap: break-word;
 }
 
@@ -184,10 +195,11 @@ video {
 .prose h2,
 .prose h3,
 .prose h4 {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
   scroll-margin-top: 2rem;
 }
 
@@ -239,7 +251,10 @@ video {
   padding-left: 1.1em;
   border-left: 2px solid var(--accent);
   color: var(--ink-soft);
+  font-family: var(--font-serif);
+  font-size: 1.35em;
   font-style: italic;
+  line-height: 1.4;
 }
 
 .prose hr {
@@ -283,16 +298,8 @@ video {
   background-color: var(--bg-raised) !important;
 }
 
-:root[data-theme='dark'] .prose .astro-code,
-:root[data-theme='dark'] .prose .astro-code span {
+.prose .astro-code span {
   color: var(--shiki-dark) !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .prose .astro-code,
-  :root:not([data-theme='light']) .prose .astro-code span {
-    color: var(--shiki-dark) !important;
-  }
 }
 
 .prose table {
@@ -321,7 +328,7 @@ video {
 
 .prose img {
   display: block;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 /* Footnotes (GFM) */
