@@ -10,7 +10,20 @@ export const site = {
   statement: ['Building a future', 'that we can all be', '*excited* about.'],
   // The paragraph under the headline.
   intro:
-    'Finn Wolff, better known as simply Wolf, is an American founder, investor, optimist, and futurist, building at the cutting edge of technology to push fashion, art & culture forward.',
+    'Finn Wolff, better known as simply Wolf, is a founder and investor. He builds AVNT and AVNT Scale, media and marketing companies for the next generation of fashion and streetwear brands.',
+  // The companies section on the home page.
+  companies: [
+    {
+      name: 'AVNT',
+      href: 'https://avnt.space',
+      text: 'One of the biggest media companies promoting next-generation brands and creatives.',
+    },
+    {
+      name: 'AVNT Scale',
+      href: 'https://avnt.space/scale',
+      text: 'The digital marketing platform top brands, designers and creatives trust for massive growth that stays tasteful and true to the brand they built.',
+    },
+  ],
   // Scrolling ticker on the home page.
   worlds: ['Technology', 'Fashion', 'Art', 'Culture', 'Streetwear', 'Web3'],
   // Path to a photo in public/images. Leave empty to hide.
@@ -66,8 +79,9 @@ export const site = {
     },
     {
       when: 'Now',
-      title: 'Building and investing',
-      text: 'Building new companies in technology and culture, and investing in tech, streetwear and Web3.',
+      title: 'AVNT and AVNT Scale',
+      text: 'Building media and marketing companies for the next generation of fashion and streetwear brands, and investing in tech, streetwear and Web3.',
+      href: '#companies',
     },
   ] as { when: string; title: string; text: string; href?: string; photo?: boolean }[],
   url: 'https://finnwolff.com',

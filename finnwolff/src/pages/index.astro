@@ -52,8 +52,29 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
     </div>
   </div>
 
+  <section id="companies" class="container section">
+    <p class="eyebrow label">[ 01 ] Companies</p>
+    <ol class="companies">
+      {
+        site.companies.map((co) => (
+          <li data-reveal>
+            <a href={co.href}>
+              <span class="name">{co.name}</span>
+              <span class="about">
+                <span class="text">{co.text}</span>
+                <span class="eyebrow site">
+                  {new URL(co.href).host + new URL(co.href).pathname.replace(/\/$/, '')} <span aria-hidden="true">↗</span>
+                </span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
   <section id="timeline" class="container section">
-    <p class="eyebrow label">[ 01 ] Timeline</p>
+    <p class="eyebrow label">[ 02 ] Timeline</p>
     <ol class="timeline">
       {
         site.story.map((c) => (
@@ -83,7 +104,7 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
     posts.length > 0 && (
       <section id="writing" class="container section">
         <div class="section-head">
-          <p class="eyebrow label">[ 02 ] Writing</p>
+          <p class="eyebrow label">[ 03 ] Writing</p>
           <a class="eyebrow" href="/writing/">
             [ Archive → ]
           </a>
@@ -270,6 +291,66 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
     text-decoration: none;
   }
 
+  /* ---------- Companies ---------- */
+
+  .companies {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .companies a {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    align-items: end;
+    gap: 1.25rem clamp(1.5rem, 4vw, 4rem);
+    padding-block: clamp(1.75rem, 4vw, 3rem);
+    border-top: 1px solid var(--rule);
+    text-decoration: none;
+  }
+
+  .companies .name {
+    font-family: var(--font-display);
+    font-size: clamp(3.25rem, 10vw, 9rem);
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .companies a:hover .name {
+    color: var(--accent);
+  }
+
+  .companies .about {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .companies .text {
+    font-size: clamp(1.02rem, 1.5vw, 1.15rem);
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .companies .site {
+    color: var(--ink);
+  }
+
+  .companies .site span {
+    display: inline-block;
+    color: var(--accent);
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .companies a:hover .site span {
+    transform: translate(3px, -3px);
+  }
+
   /* ---------- Timeline ---------- */
 
   .timeline {
@@ -426,7 +507,8 @@ const roles = site.tagline.replace(/\.$/, '').split(/,\s*(?:and\s+)?/);
       align-items: flex-start;
     }
 
-    .entry {
+    .entry,
+    .companies a {
       grid-template-columns: 1fr;
     }
 
